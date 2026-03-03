@@ -1,5 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:conversion_kit/conversion_kit.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('UnitConverter', () {
@@ -12,7 +12,7 @@ void main() {
     group('基本转换', () {
       test('长度转换：千米转米', () {
         final result = converter.convert(
-          value: 1.0,
+          value: 1,
           categoryId: 'length',
           fromUnitId: 'kilometer',
           toUnitId: 'meter',
@@ -23,7 +23,7 @@ void main() {
 
       test('重量转换：千克转克', () {
         final result = converter.convert(
-          value: 1.0,
+          value: 1,
           categoryId: 'weight',
           fromUnitId: 'kilogram',
           toUnitId: 'gram',
@@ -34,7 +34,7 @@ void main() {
 
       test('无效类别返回原值', () {
         final result = converter.convert(
-          value: 100.0,
+          value: 100,
           categoryId: 'invalid',
           fromUnitId: 'meter',
           toUnitId: 'kilometer',
@@ -45,7 +45,7 @@ void main() {
 
       test('无效单位返回原值', () {
         final result = converter.convert(
-          value: 100.0,
+          value: 100,
           categoryId: 'length',
           fromUnitId: 'invalid',
           toUnitId: 'meter',
@@ -120,7 +120,7 @@ void main() {
       });
 
       test('格式化整数', () {
-        final result = converter.formatResult(100.0);
+        final result = converter.formatResult(100);
         expect(result, '100');
       });
     });
