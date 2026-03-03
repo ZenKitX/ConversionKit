@@ -1,0 +1,10 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - example/**
+
+linter:
+  rules:
+    # 示例代码允许使用 print
+    avoid_print: false
