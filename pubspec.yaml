@@ -1,5 +1,5 @@
 name: conversion_kit
-description: "单位换算工具包 - 提供单位换算、汇率转换、房贷计算等功能"
+description: A comprehensive Flutter package for unit conversion, currency exchange, and mortgage calculation with 60+ units across 9 categories.
 version: 0.2.0
 homepage: https://github.com/ZenKitX/ConversionKit
 repository: https://github.com/ZenKitX/ConversionKit

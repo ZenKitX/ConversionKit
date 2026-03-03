@@ -19,8 +19,7 @@
 
 ```yaml
 dependencies:
-  conversion_kit:
-    path: ../conversion_kit  # 本地路径
+  conversion_kit: ^0.2.0
 ```
 
 然后运行：
