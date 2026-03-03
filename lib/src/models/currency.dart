@@ -11,6 +11,13 @@
 /// );
 /// ```
 class Currency {
+  /// 创建货币实例
+  const Currency({
+    required this.code,
+    required this.name,
+    required this.symbol,
+  });
+
   /// 货币代码（ISO 4217）
   final String code;
 
@@ -19,13 +26,6 @@ class Currency {
 
   /// 货币符号
   final String symbol;
-
-  /// 创建货币实例
-  const Currency({
-    required this.code,
-    required this.name,
-    required this.symbol,
-  });
 
   @override
   bool operator ==(Object other) {

@@ -1,11 +1,5 @@
 library;
 
-// 导出转换器
-export 'src/converters/unit_converter.dart';
-// 导出数据
-export 'src/data/conversion_data.dart';
-export 'src/models/conversion_category.dart';
-
 /// ConversionKit - 单位换算工具包
 ///
 /// 提供长度、面积、重量、温度等多种单位的转换功能。
@@ -27,7 +21,7 @@ export 'src/models/conversion_category.dart';
 ///
 /// // 长度转换
 /// final meters = converter.convert(
-///   value: 1.0,
+///   value: 1,
 ///   categoryId: 'length',
 ///   fromUnitId: 'kilometer',
 ///   toUnitId: 'meter',
@@ -49,16 +43,13 @@ export 'src/models/conversion_category.dart';
 /// ); // 返回 'FF'
 /// ```
 
+// 导出转换器
+export 'src/converters/unit_converter.dart';
+// 导出数据
+export 'src/data/conversion_data.dart';
 // 导出模型
 export 'src/models/conversion_category.dart';
 export 'src/models/conversion_unit.dart';
 export 'src/models/currency.dart';
-
-// 导出转换器
-export 'src/converters/unit_converter.dart';
-
-// 导出数据
-export 'src/data/conversion_data.dart';
-
 // 导出工具
 export 'src/utils/conversion_logic.dart';
