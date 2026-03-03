@@ -1,5 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:conversion_kit/conversion_kit.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('ConversionCategory', () {
@@ -7,14 +7,14 @@ void main() {
       id: 'meter',
       name: '米',
       symbol: 'm',
-      toBaseRatio: 1.0,
+      toBaseRatio: 1,
     );
 
     const kilometer = ConversionUnit(
       id: 'kilometer',
       name: '千米',
       symbol: 'km',
-      toBaseRatio: 1000.0,
+      toBaseRatio: 1000,
     );
 
     test('创建类别实例', () {
@@ -70,11 +70,7 @@ void main() {
         units: [meter],
       );
 
-      const category3 = ConversionCategory(
-        id: 'weight',
-        name: '重量',
-        units: [],
-      );
+      const category3 = ConversionCategory(id: 'weight', name: '重量', units: []);
 
       expect(category1, equals(category2));
       expect(category1, isNot(equals(category3)));

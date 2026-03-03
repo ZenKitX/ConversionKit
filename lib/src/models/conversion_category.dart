@@ -13,6 +13,14 @@ import 'conversion_unit.dart';
 /// );
 /// ```
 class ConversionCategory {
+  const ConversionCategory({
+    required this.id,
+    required this.name,
+    required this.units,
+    this.requiresApi = false,
+    this.isSpecial = false,
+  });
+
   /// 类别唯一标识
   final String id;
 
@@ -29,14 +37,6 @@ class ConversionCategory {
   ///
   /// 特殊换算不使用简单的比率转换，需要特殊的转换逻辑
   final bool isSpecial;
-
-  const ConversionCategory({
-    required this.id,
-    required this.name,
-    required this.units,
-    this.requiresApi = false,
-    this.isSpecial = false,
-  });
 
   /// 根据 ID 查找单位
   ConversionUnit? findUnitById(String unitId) {
