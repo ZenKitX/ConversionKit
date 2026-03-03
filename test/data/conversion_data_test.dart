@@ -1,5 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:conversion_kit/conversion_kit.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('ConversionData', () {
