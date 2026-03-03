@@ -3,6 +3,17 @@ import '../../models/conversion_category.dart';
 
 /// 类别网格样式配置
 class CategoryGridStyle {
+  /// 创建类别网格样式
+  const CategoryGridStyle({
+    this.spacing = 16,
+    this.borderRadius = 12,
+    this.cardColor,
+    this.shadows,
+    this.iconSize = 48,
+    this.titleStyle,
+    this.descriptionStyle,
+  });
+
   /// 网格间距
   final double spacing;
 
@@ -23,23 +34,21 @@ class CategoryGridStyle {
 
   /// 描述样式
   final TextStyle? descriptionStyle;
-
-  /// 创建类别网格样式
-  const CategoryGridStyle({
-    this.spacing = 16.0,
-    this.borderRadius = 12.0,
-    this.cardColor,
-    this.shadows,
-    this.iconSize = 48.0,
-    this.titleStyle,
-    this.descriptionStyle,
-  });
 }
 
 /// 类别网格组件
 ///
 /// 显示所有换算类别的网格视图
 class CategoryGrid extends StatelessWidget {
+  /// 创建类别网格
+  const CategoryGrid({
+    required this.categories,
+    required this.onCategorySelected,
+    this.crossAxisCount = 3,
+    this.style,
+    super.key,
+  });
+
   /// 类别列表
   final List<ConversionCategory> categories;
 
@@ -52,15 +61,6 @@ class CategoryGrid extends StatelessWidget {
   /// 样式配置
   final CategoryGridStyle? style;
 
-  /// 创建类别网格
-  const CategoryGrid({
-    required this.categories,
-    required this.onCategorySelected,
-    this.crossAxisCount = 3,
-    this.style,
-    super.key,
-  });
-
   @override
   Widget build(BuildContext context) {
     final effectiveStyle = style ?? const CategoryGridStyle();
@@ -72,7 +72,6 @@ class CategoryGrid extends StatelessWidget {
         crossAxisCount: crossAxisCount,
         crossAxisSpacing: effectiveStyle.spacing,
         mainAxisSpacing: effectiveStyle.spacing,
-        childAspectRatio: 1.0,
       ),
       itemCount: categories.length,
       itemBuilder: (context, index) {
@@ -90,17 +89,17 @@ class CategoryGrid extends StatelessWidget {
 
 /// 类别卡片
 class _CategoryCard extends StatelessWidget {
-  final ConversionCategory category;
-  final VoidCallback onTap;
-  final CategoryGridStyle style;
-  final ThemeData theme;
-
   const _CategoryCard({
     required this.category,
     required this.onTap,
     required this.style,
     required this.theme,
   });
+
+  final ConversionCategory category;
+  final VoidCallback onTap;
+  final CategoryGridStyle style;
+  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +119,7 @@ class _CategoryCard extends StatelessWidget {
                   boxShadow: style.shadows,
                 )
               : null,
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

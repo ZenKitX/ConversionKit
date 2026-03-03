@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:conversion_kit/src/models/conversion_category.dart';
 import 'package:conversion_kit/src/ui/widgets/category_grid.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('CategoryGrid', () {
@@ -85,9 +85,9 @@ void main() {
 
     testWidgets('应该应用自定义样式', (tester) async {
       const customStyle = CategoryGridStyle(
-        spacing: 20.0,
-        borderRadius: 16.0,
-        iconSize: 64.0,
+        spacing: 20,
+        borderRadius: 16,
+        iconSize: 64,
       );
 
       await tester.pumpWidget(
@@ -127,9 +127,9 @@ void main() {
     test('应该使用默认值', () {
       const style = CategoryGridStyle();
 
-      expect(style.spacing, equals(16.0));
-      expect(style.borderRadius, equals(12.0));
-      expect(style.iconSize, equals(48.0));
+      expect(style.spacing, equals(16));
+      expect(style.borderRadius, equals(12));
+      expect(style.iconSize, equals(48));
       expect(style.cardColor, isNull);
       expect(style.shadows, isNull);
       expect(style.titleStyle, isNull);
@@ -138,15 +138,15 @@ void main() {
 
     test('应该使用自定义值', () {
       const style = CategoryGridStyle(
-        spacing: 20.0,
-        borderRadius: 16.0,
-        iconSize: 64.0,
+        spacing: 20,
+        borderRadius: 16,
+        iconSize: 64,
         cardColor: Colors.blue,
       );
 
-      expect(style.spacing, equals(20.0));
-      expect(style.borderRadius, equals(16.0));
-      expect(style.iconSize, equals(64.0));
+      expect(style.spacing, equals(20));
+      expect(style.borderRadius, equals(16));
+      expect(style.iconSize, equals(64));
       expect(style.cardColor, equals(Colors.blue));
     });
   });

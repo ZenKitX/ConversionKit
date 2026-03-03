@@ -1,23 +1,5 @@
 /// 换算收藏模型
 class ConversionFavorite {
-  /// 收藏 ID
-  final String id;
-
-  /// 收藏名称
-  final String name;
-
-  /// 类别 ID
-  final String categoryId;
-
-  /// 源单位 ID
-  final String fromUnitId;
-
-  /// 目标单位 ID
-  final String toUnitId;
-
-  /// 创建时间
-  final DateTime createdAt;
-
   /// 创建换算收藏
   const ConversionFavorite({
     required this.id,
@@ -39,6 +21,24 @@ class ConversionFavorite {
       createdAt: DateTime.parse(json['createdAt'] as String),
     );
   }
+
+  /// 收藏 ID
+  final String id;
+
+  /// 收藏名称
+  final String name;
+
+  /// 类别 ID
+  final String categoryId;
+
+  /// 源单位 ID
+  final String fromUnitId;
+
+  /// 目标单位 ID
+  final String toUnitId;
+
+  /// 创建时间
+  final DateTime createdAt;
 
   /// 转换为 JSON
   Map<String, dynamic> toJson() {

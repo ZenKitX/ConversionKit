@@ -58,6 +58,11 @@ export 'src/models/currency.dart';
 export 'src/models/mortgage.dart';
 // 导出服务
 export 'src/services/currency_api_service.dart';
+// 导出 UI 模型
+export 'src/ui/models/conversion_favorite.dart';
+export 'src/ui/models/conversion_history.dart';
+// 导出 UI 组件
+export 'src/ui/widgets/category_grid.dart';
 // 导出工具
 export 'src/utils/conversion_logic.dart';
 export 'src/utils/mortgage_logic.dart';

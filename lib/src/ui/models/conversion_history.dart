@@ -1,23 +1,5 @@
 /// 换算历史记录模型
 class ConversionHistory {
-  /// 类别 ID
-  final String categoryId;
-
-  /// 源单位 ID
-  final String fromUnitId;
-
-  /// 目标单位 ID
-  final String toUnitId;
-
-  /// 输入值
-  final double inputValue;
-
-  /// 输出值
-  final double outputValue;
-
-  /// 记录时间
-  final DateTime timestamp;
-
   /// 创建换算历史记录
   const ConversionHistory({
     required this.categoryId,
@@ -39,6 +21,24 @@ class ConversionHistory {
       timestamp: DateTime.parse(json['timestamp'] as String),
     );
   }
+
+  /// 类别 ID
+  final String categoryId;
+
+  /// 源单位 ID
+  final String fromUnitId;
+
+  /// 目标单位 ID
+  final String toUnitId;
+
+  /// 输入值
+  final double inputValue;
+
+  /// 输出值
+  final double outputValue;
+
+  /// 记录时间
+  final DateTime timestamp;
 
   /// 转换为 JSON
   Map<String, dynamic> toJson() {
