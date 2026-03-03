@@ -69,8 +69,18 @@ conversion_kit/
 │       ├── calculators/                  # 计算器（新增）
 │       │   └── mortgage_calculator.dart  # 房贷计算器
 │       ├── data/                         # 数据定义
-│       │   ├── conversion_data.dart      # 单位数据
-│       │   └── currency_data.dart        # 货币数据（新增）
+│       │   ├── conversion_data.dart      # 数据聚合类
+│       │   ├── currency_data.dart        # 货币数据（新增）
+│       │   └── categories/               # 类别数据目录
+│       │       ├── length_data.dart      # 长度单位数据
+│       │       ├── area_data.dart        # 面积单位数据
+│       │       ├── weight_data.dart      # 重量单位数据
+│       │       ├── temperature_data.dart # 温度单位数据
+│       │       ├── volume_data.dart      # 体积单位数据
+│       │       ├── speed_data.dart       # 速度单位数据
+│       │       ├── pressure_data.dart    # 压强单位数据
+│       │       ├── power_data.dart       # 功率单位数据
+│       │       └── number_system_data.dart # 进制单位数据
 │       ├── services/                     # 服务层（新增）
 │       │   ├── currency_api_service.dart # 汇率 API 服务
 │       │   └── cache_service.dart        # 缓存服务
@@ -95,6 +105,7 @@ conversion_kit/
 │   ├── converters/
 │   ├── calculators/                     # 计算器测试
 │   ├── data/
+│   │   └── categories/                  # 类别数据测试
 │   ├── services/                        # 服务测试
 │   ├── utils/
 │   └── extensions/
@@ -103,6 +114,10 @@ conversion_kit/
 │   ├── currency_example.dart            # 汇率换算示例
 │   └── mortgage_example.dart            # 房贷计算示例
 ├── docs/                                # 文档
+│   ├── ARCHITECTURE.md                  # 架构设计文档
+│   ├── CODE_STYLE.md                    # 代码风格指南
+│   ├── CONTRIBUTING.md                  # 贡献指南
+│   ├── STANDARDS.md                     # 规范化标准
 │   ├── conversion-kit-research.md       # 单位换算调研
 │   ├── convert-package-research.md      # convert 包调研
 │   ├── development-plan.md              # 原开发计划
@@ -113,6 +128,25 @@ conversion_kit/
 ├── CHANGELOG.md
 └── LICENSE
 ```
+
+### 数据组织原则
+
+#### 按类别拆分数据
+
+为了保持代码的可维护性和可扩展性，我们将单位数据按类别拆分到独立文件中：
+
+**设计原则**：
+1. **单一职责**：每个文件只负责一个类别的数据
+2. **低耦合**：各类别数据独立，互不影响
+3. **易扩展**：添加新类别只需新增文件
+4. **易维护**：修改某类别只需修改对应文件
+
+**实现方式**：
+- 每个类别数据独立在 `lib/src/data/categories/` 目录下
+- `ConversionData` 作为聚合类提供统一访问接口
+- 使用 `const` 定义不可变数据
+
+详细的架构设计请参考 [ARCHITECTURE.md](ARCHITECTURE.md)。
 
 ## 设计原则
 
