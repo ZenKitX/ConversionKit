@@ -2,18 +2,15 @@
 
 ## 项目定位
 
-ConversionKit 是一个综合性的数据转换工具包，融合了两个方向：
-
-1. **数据编解码** - 参考 `package:convert`，提供十六进制、百分号编码、代码页等编解码功能
-2. **单位换算** - 提供长度、面积、重量、温度等物理单位的转换功能
+ConversionKit 是一个专注于单位换算的 Flutter 工具包，提供完整的单位转换功能和计算器功能。
 
 ## 项目愿景
 
-打造一个功能完整、易于使用、高性能的 Dart 转换工具包，成为 Flutter/Dart 开发者在数据转换和单位换算场景下的首选方案。
+打造一个功能完整、易于使用、界面美观的单位换算工具包，为 Flutter 开发者提供开箱即用的换算解决方案。
 
 ## 核心特性
 
-### 已实现功能（单位换算模块）
+### 已实现功能（v0.1.0）
 
 - ✅ 9 大类别：长度、面积、重量、温度、体积、速度、压强、功率、进制
 - ✅ 60+ 单位转换
@@ -21,38 +18,36 @@ ConversionKit 是一个综合性的数据转换工具包，融合了两个方向
 - ✅ 完整的测试覆盖
 - ✅ 零外部依赖
 
-### 待实现功能（编解码模块）
+### 待实现功能
 
-参考 `package:convert` 的设计，计划实现：
+#### 1. 汇率换算（v0.2.0）
+- 实时汇率查询（需要 API 支持）
+- 离线汇率缓存
+- 支持主流货币：USD, EUR, CNY, JPY, GBP 等
+- 汇率历史记录
+- 自动更新机制
 
-1. **十六进制编解码** (Hex Codec)
-   - RFC 4648 Base16 规范
-   - 字节数组 ↔ 十六进制字符串
-   - 支持大小写选项
+#### 2. 房贷计算器（v0.2.0）
+- 等额本息计算
+- 等额本金计算
+- 提前还款计算
+- 还款计划表生成
+- 利息总额计算
+- 支持商业贷款、公积金贷款、组合贷款
 
-2. **百分号编码** (Percent Encoding)
-   - RFC 3986 URL 编码规范
-   - 字节数组 ↔ 百分号编码字符串
-   - 可配置保留字符集
+#### 3. UI 组件库（v0.3.0）
+- 换算类别选择界面
+- 单位选择器
+- 数值输入组件
+- 结果展示组件
+- 历史记录组件
+- 收藏功能
 
-3. **代码页编码** (CodePage)
-   - ISO-8859 系列编码（Latin-2 到 Latin-10）
-   - 西里尔、阿拉伯、希腊、希伯来等字符集
-   - 单字节字符编码支持
-
-4. **日期时间格式化器** (Fixed DateTime Formatter)
-   - 固定模式的日期时间格式化
-   - 高性能解析和格式化
-   - 支持自定义格式模式
-
-5. **累加器 Sink** (Accumulator Sinks)
-   - 通用累加器 (AccumulatorSink)
-   - 字节累加器 (ByteAccumulatorSink)
-   - 字符串累加器 (StringAccumulatorSink)
-
-6. **身份编解码器** (Identity Codec)
-   - 不做任何转换的占位符编解码器
-   - 支持编解码器组合
+#### 4. 扩展功能（v0.4.0）
+- 时间换算（年、月、日、时、分、秒）
+- 数据存储换算（Byte, KB, MB, GB, TB）
+- 能量换算（焦耳、卡路里、千瓦时）
+- 角度换算（度、弧度、梯度）
 
 ## 项目架构
 
@@ -65,53 +60,54 @@ conversion_kit/
 │   └── src/
 │       ├── models/                       # 数据模型
 │       │   ├── conversion_unit.dart      # 单位模型
-│       │   └── conversion_category.dart  # 类别模型
+│       │   ├── conversion_category.dart  # 类别模型
+│       │   ├── currency.dart             # 货币模型（新增）
+│       │   └── mortgage.dart             # 房贷模型（新增）
 │       ├── converters/                   # 转换器
-│       │   └── unit_converter.dart       # 单位转换器
+│       │   ├── unit_converter.dart       # 单位转换器
+│       │   └── currency_converter.dart   # 汇率转换器（新增）
+│       ├── calculators/                  # 计算器（新增）
+│       │   └── mortgage_calculator.dart  # 房贷计算器
 │       ├── data/                         # 数据定义
-│       │   └── conversion_data.dart      # 单位数据
+│       │   ├── conversion_data.dart      # 单位数据
+│       │   └── currency_data.dart        # 货币数据（新增）
+│       ├── services/                     # 服务层（新增）
+│       │   ├── currency_api_service.dart # 汇率 API 服务
+│       │   └── cache_service.dart        # 缓存服务
 │       ├── utils/                        # 工具类
-│       │   └── conversion_logic.dart     # 转换逻辑
-│       ├── codecs/                       # 编解码器（新增）
-│       │   ├── hex/                      # 十六进制
-│       │   │   ├── hex_codec.dart
-│       │   │   ├── hex_encoder.dart
-│       │   │   └── hex_decoder.dart
-│       │   ├── percent/                  # 百分号编码
-│       │   │   ├── percent_codec.dart
-│       │   │   ├── percent_encoder.dart
-│       │   │   └── percent_decoder.dart
-│       │   ├── codepage/                 # 代码页
-│       │   │   └── codepage.dart
-│       │   ├── datetime/                 # 日期时间
-│       │   │   └── fixed_datetime_formatter.dart
-│       │   └── identity/                 # 身份编解码器
-│       │       └── identity_codec.dart
-│       ├── sinks/                        # 累加器（新增）
-│       │   ├── accumulator_sink.dart
-│       │   ├── byte_accumulator_sink.dart
-│       │   └── string_accumulator_sink.dart
+│       │   ├── conversion_logic.dart     # 转换逻辑
+│       │   └── mortgage_logic.dart       # 房贷计算逻辑（新增）
+│       ├── ui/                           # UI 组件（新增）
+│       │   ├── widgets/                  # 通用组件
+│       │   │   ├── category_grid.dart    # 类别网格
+│       │   │   ├── unit_selector.dart    # 单位选择器
+│       │   │   ├── value_input.dart      # 数值输入
+│       │   │   └── result_display.dart   # 结果展示
+│       │   └── screens/                  # 页面
+│       │       ├── home_screen.dart      # 主页
+│       │       ├── conversion_screen.dart # 换算页面
+│       │       ├── currency_screen.dart  # 汇率页面
+│       │       └── mortgage_screen.dart  # 房贷页面
 │       └── extensions/                   # 扩展方法（新增）
 │           └── conversion_extensions.dart
 ├── test/                                 # 测试文件
 │   ├── models/
 │   ├── converters/
+│   ├── calculators/                     # 计算器测试
 │   ├── data/
+│   ├── services/                        # 服务测试
 │   ├── utils/
-│   ├── codecs/                          # 编解码器测试
-│   ├── sinks/                           # 累加器测试
-│   └── extensions/                      # 扩展方法测试
+│   └── extensions/
 ├── example/
 │   ├── unit_conversion_example.dart     # 单位换算示例
-│   └── codec_example.dart               # 编解码示例
-├── benchmark/                           # 性能测试（新增）
-│   ├── conversion_benchmark.dart
-│   └── codec_benchmark.dart
+│   ├── currency_example.dart            # 汇率换算示例
+│   └── mortgage_example.dart            # 房贷计算示例
 ├── docs/                                # 文档
-│   ├── convert-package-research.md      # convert 包调研
 │   ├── conversion-kit-research.md       # 单位换算调研
+│   ├── convert-package-research.md      # convert 包调研
 │   ├── development-plan.md              # 原开发计划
-│   └── project-plan.md                  # 本文档
+│   ├── project-plan.md                  # 本文档
+│   └── api-integration.md               # API 集成文档（新增）
 ├── pubspec.yaml
 ├── README.md
 ├── CHANGELOG.md
@@ -122,172 +118,162 @@ conversion_kit/
 
 ### 1. 模块化设计
 
-- **单位换算模块**：独立的单位转换功能
-- **编解码模块**：独立的数据编解码功能
-- 两个模块可以独立使用，互不干扰
+- **单位换算模块**：基础的物理单位转换
+- **汇率换算模块**：实时货币汇率转换
+- **房贷计算模块**：贷款计算和还款计划
+- **UI 组件模块**：可复用的界面组件
+- 各模块独立，可按需使用
 
 ### 2. 统一的 API 风格
 
-遵循 Dart 的 `Codec<S, T>` 接口设计：
-
 ```dart
-abstract class Codec<S, T> {
-  Encoder<S, T> get encoder;
-  Decoder<T, S> get decoder;
-  
-  T encode(S input);
-  S decode(T encoded);
-  
-  Codec<S, R> fuse<R>(Codec<T, R> other);
-}
+// 单位换算
+final converter = UnitConverter();
+final result = converter.convert(
+  value: 1.0,
+  categoryId: 'length',
+  fromUnitId: 'meter',
+  toUnitId: 'kilometer',
+);
+
+// 汇率换算
+final currencyConverter = CurrencyConverter();
+final amount = await currencyConverter.convert(
+  value: 100.0,
+  from: 'USD',
+  to: 'CNY',
+);
+
+// 房贷计算
+final calculator = MortgageCalculator();
+final result = calculator.calculateEqualPayment(
+  principal: 1000000,
+  annualRate: 0.049,
+  years: 30,
+);
 ```
 
-### 3. 零依赖原则
+### 3. 最小依赖原则
 
-- 仅依赖 Dart SDK 和 Flutter SDK
-- 不引入第三方依赖
+- 核心功能零外部依赖
+- 汇率功能需要 `http` 包（可选）
+- UI 组件依赖 Flutter SDK
 - 保持包的轻量级
 
 ### 4. 高性能
 
-- 使用类型化数组（Uint8List、Uint16List）
-- 避免不必要的内存分配
-- 支持分块转换（chunked conversion）
+- 本地计算优先
+- 汇率数据缓存
+- 避免不必要的网络请求
+- 优化计算算法
 
 ### 5. 完整测试
 
 - 每个功能都有对应的单元测试
 - 测试覆盖正常情况和边界情况
-- 性能基准测试
+- Widget 测试覆盖 UI 组件
 
 ### 6. 清晰的文档
 
 - 所有公共 API 都有详细的文档注释
 - 提供使用示例
-- 包含性能说明和注意事项
+- 包含最佳实践指南
 
-## 个人风格体现
+## 特色功能
 
 ### 1. 扩展方法
 
 为常用类型添加便捷的扩展方法：
 
 ```dart
-// 十六进制扩展
-extension HexExtension on List<int> {
-  String toHex({bool uppercase = false}) => hex.encode(this);
-}
-
-extension HexStringExtension on String {
-  List<int> fromHex() => hex.decode(this);
-}
-
-// 百分号编码扩展
-extension PercentExtension on String {
-  String percentEncode() => utf8.fuse(percent).encode(this);
-  String percentDecode() => utf8.fuse(percent).decode(this);
-}
-
 // 单位转换扩展
 extension DoubleConversionExtension on double {
-  double convertLength({
-    required String from,
-    required String to,
-  }) => UnitConverter().convert(
+  double toKilometers() => this * 1000;
+  double toMiles() => this * 1.60934;
+  double toCelsius() => (this - 32) * 5 / 9;
+  double toFahrenheit() => this * 9 / 5 + 32;
+}
+
+// 货币扩展
+extension CurrencyExtension on double {
+  Future<double> toUSD() async => await CurrencyConverter().convert(
     value: this,
-    categoryId: 'length',
-    fromUnitId: from,
-    toUnitId: to,
+    from: 'CNY',
+    to: 'USD',
   );
 }
 ```
 
-### 2. 构建器模式
+### 2. 智能输入
 
-提供更灵活的配置方式：
+- 自动识别输入格式
+- 支持科学计数法
+- 支持千分位分隔符
+- 实时输入验证
 
-```dart
-// 十六进制编解码器构建器
-final customHex = HexCodec.builder()
-  .uppercase(true)
-  .separator(':')
-  .build();
+### 3. 历史记录
 
-// 百分号编码构建器
-final customPercent = PercentCodec.builder()
-  .preserveChars('.-_~')
-  .spaceAsPlus(false)
-  .build();
-```
+- 保存最近的换算记录
+- 快速重复换算
+- 收藏常用换算
 
-### 3. Try* 系列方法
+### 4. 离线支持
 
-提供不抛异常的版本：
+- 所有单位换算完全离线
+- 汇率数据本地缓存
+- 自动更新机制
 
-```dart
-// 原版：失败时抛异常
-final result = hex.decode('invalid'); // 抛出 FormatException
+### 5. 主题定制
 
-// Try 版本：失败时返回 null
-final result = hex.tryDecode('invalid'); // 返回 null
-```
+- 支持亮色/暗色主题
+- 自定义主题色
+- 适配系统主题
 
-### 4. 链式调用
+## 功能对比
 
-支持流畅的链式调用：
+### ConversionKit vs 其他换算应用
 
-```dart
-final result = 'Hello World'
-  .percentEncode()
-  .toUpperCase()
-  .percentDecode();
-```
+| 功能 | 普通换算应用 | ConversionKit |
+|------|-------------|---------------|
+| 基础单位换算 | ✅ | ✅ |
+| 汇率换算 | ✅ | ✅ |
+| 房贷计算 | ❌ | ✅ |
+| 开源可定制 | ❌ | ✅ |
+| Flutter 组件 | ❌ | ✅ |
+| 完整测试 | ❌ | ✅ |
+| 离线支持 | 部分 | ✅ |
+| API 友好 | ❌ | ✅ |
 
-## 与现有项目的关系
+### 定位
 
-### ConversionKit vs package:convert
-
-| 特性 | package:convert | ConversionKit |
-|------|----------------|---------------|
-| 十六进制编解码 | ✅ | ✅ 计划实现 |
-| 百分号编码 | ✅ | ✅ 计划实现 |
-| 代码页编码 | ✅ | ✅ 计划实现 |
-| 日期时间格式化 | ✅ | ✅ 计划实现 |
-| 累加器 Sink | ✅ | ✅ 计划实现 |
-| 身份编解码器 | ✅ | ✅ 计划实现 |
-| 单位换算 | ❌ | ✅ 已实现 |
-| 扩展方法 | ❌ | ✅ 计划实现 |
-| 构建器模式 | ❌ | ✅ 计划实现 |
-| Try* 方法 | ❌ | ✅ 计划实现 |
-
-### 定位差异
-
-- **package:convert**: 专注于数据编解码，Dart 官方维护
-- **ConversionKit**: 综合性转换工具包，包含编解码 + 单位换算
+- **面向开发者**：提供可复用的组件和 API
+- **面向用户**：提供完整的换算应用
+- **开源免费**：MIT 协议，可商用
 
 ## 适用场景
 
-### 单位换算模块
+### 开发者场景
 
-- ✅ 计算器应用
-- ✅ 工具类应用
+- ✅ Flutter 应用中需要单位换算功能
+- ✅ 需要汇率换算的电商应用
+- ✅ 房贷计算器应用
+- ✅ 工具类应用开发
 - ✅ 教育类应用
-- ✅ 科学计算应用
 
-### 编解码模块
+### 用户场景
 
-- ✅ 网络通信（URL 编码、十六进制数据）
-- ✅ 数据存储（编码转换）
-- ✅ 遗留系统集成（代码页转换）
-- ✅ 日志处理（固定格式日期时间）
+- ✅ 日常单位换算
+- ✅ 出国旅游汇率查询
+- ✅ 购房贷款计算
+- ✅ 学习和工作中的单位转换
+- ✅ 跨国购物价格对比
 
-## 不适用场景
+## 技术限制
 
-- ❌ 需要实时汇率的金融应用（需要额外实现 API 集成）
-- ❌ 需要极高精度的科学计算（double 精度限制）
-- ❌ 需要复杂单位组合（如 m/s²）
-- ❌ 需要 Base64 编码（使用 dart:convert 内置）
-- ❌ 需要 JSON 处理（使用 dart:convert 内置）
+- ⚠️ 汇率数据需要网络连接（首次获取）
+- ⚠️ double 精度限制（约 15-17 位有效数字）
+- ⚠️ 不支持复杂单位组合（如 m/s²）
+- ⚠️ 房贷计算基于标准公式，不包含特殊政策
 
 ## 性能目标
 
@@ -295,13 +281,18 @@ final result = 'Hello World'
 
 - 基本转换：< 1 微秒
 - 温度转换：< 2 微秒
-- 进制转换：< 10 微秒（取决于数字大小）
+- 进制转换：< 10 微秒
 
-### 编解码
+### 汇率换算
 
-- 十六进制编码：< 1 微秒/字节
-- 百分号编码：< 2 微秒/字节
-- 代码页转换：< 1 微秒/字符
+- 本地缓存查询：< 1 毫秒
+- API 请求：< 2 秒
+- 缓存有效期：24 小时
+
+### 房贷计算
+
+- 等额本息/本金：< 10 毫秒
+- 还款计划生成（30年）：< 50 毫秒
 
 ## 质量目标
 
@@ -312,51 +303,92 @@ final result = 'Hello World'
 
 ## 发布计划
 
-### v0.1.0（当前版本）
+### v0.1.0（当前版本）✅
 
 - ✅ 单位换算核心功能
 - ✅ 9 大类别，60+ 单位
-- ✅ 基础测试覆盖
+- ✅ 特殊转换：温度、进制
+- ✅ 完整测试覆盖（63 个测试）
 
-### v0.2.0（编解码基础）
+### v0.2.0（汇率与房贷）
 
-- 十六进制编解码
-- 百分号编码
-- 身份编解码器
-- 累加器 Sink
+**核心功能**
+- 汇率换算器实现
+- 汇率 API 集成（支持多个数据源）
+- 汇率缓存机制
+- 房贷计算器（等额本息、等额本金）
+- 提前还款计算
+- 还款计划表生成
 
-### v0.3.0（编解码完整）
+**测试**
+- 汇率转换测试
+- 房贷计算测试
+- API 集成测试
 
-- 代码页编码
-- 日期时间格式化器
-- 完整的编解码测试
+### v0.3.0（UI 组件）
 
-### v0.4.0（增强功能）
+**UI 组件**
+- 类别网格组件
+- 单位选择器
+- 数值输入组件
+- 结果展示组件
+- 汇率页面
+- 房贷计算页面
 
+**功能增强**
+- 历史记录
+- 收藏功能
+- 主题切换
+
+### v0.4.0（扩展功能）
+
+- 时间换算
+- 数据存储换算
+- 能量换算
+- 角度换算
 - 扩展方法
-- 构建器模式
-- Try* 系列方法
 - 性能优化
 
 ### v1.0.0（正式版）
 
 - 完整功能
 - 完善文档
-- 性能基准测试
+- 示例应用
 - 发布到 pub.dev
+- 应用商店上架
 
 ## 下一步行动
 
-1. 完成编解码模块的详细开发计划
-2. 开始实现十六进制编解码器
-3. 逐步完善其他编解码功能
-4. 添加扩展方法和便捷 API
-5. 完善文档和示例
-6. 性能优化和测试
-7. 准备发布
+### 立即开始（v0.2.0）
+
+1. **汇率换算模块**
+   - 设计 Currency 模型
+   - 实现 CurrencyConverter
+   - 集成汇率 API（考虑多个数据源）
+   - 实现缓存机制
+   - 编写测试
+
+2. **房贷计算模块**
+   - 设计 Mortgage 模型
+   - 实现 MortgageCalculator
+   - 等额本息/本金算法
+   - 提前还款计算
+   - 还款计划生成
+   - 编写测试
+
+3. **文档完善**
+   - API 集成文档
+   - 使用示例
+   - 最佳实践
+
+### 后续计划
+
+4. **UI 组件开发**（v0.3.0）
+5. **扩展功能**（v0.4.0）
+6. **性能优化和发布**（v1.0.0）
 
 ---
 
-**文档版本**: 1.0  
-**创建日期**: 2026-03-03  
+**文档版本**: 2.0  
+**更新日期**: 2026-03-03  
 **作者**: ZenKitX Team
