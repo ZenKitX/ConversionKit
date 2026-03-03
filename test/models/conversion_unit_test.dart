@@ -1,5 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:conversion_kit/conversion_kit.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('ConversionUnit', () {
@@ -8,7 +8,7 @@ void main() {
         id: 'meter',
         name: '米',
         symbol: 'm',
-        toBaseRatio: 1.0,
+        toBaseRatio: 1,
       );
 
       expect(unit.id, 'meter');
@@ -22,21 +22,21 @@ void main() {
         id: 'meter',
         name: '米',
         symbol: 'm',
-        toBaseRatio: 1.0,
+        toBaseRatio: 1,
       );
 
       const unit2 = ConversionUnit(
         id: 'meter',
         name: '米',
         symbol: 'm',
-        toBaseRatio: 1.0,
+        toBaseRatio: 1,
       );
 
       const unit3 = ConversionUnit(
         id: 'kilometer',
         name: '千米',
         symbol: 'km',
-        toBaseRatio: 1000.0,
+        toBaseRatio: 1000,
       );
 
       expect(unit1, equals(unit2));
@@ -48,7 +48,7 @@ void main() {
         id: 'meter',
         name: '米',
         symbol: 'm',
-        toBaseRatio: 1.0,
+        toBaseRatio: 1,
       );
 
       expect(unit.toString(), '米 (m)');
@@ -59,14 +59,14 @@ void main() {
         id: 'meter',
         name: '米',
         symbol: 'm',
-        toBaseRatio: 1.0,
+        toBaseRatio: 1,
       );
 
       const unit2 = ConversionUnit(
         id: 'meter',
         name: '米',
         symbol: 'm',
-        toBaseRatio: 1.0,
+        toBaseRatio: 1,
       );
 
       expect(unit1.hashCode, equals(unit2.hashCode));

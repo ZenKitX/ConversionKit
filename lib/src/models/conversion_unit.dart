@@ -12,6 +12,13 @@
 /// );
 /// ```
 class ConversionUnit {
+  const ConversionUnit({
+    required this.id,
+    required this.name,
+    required this.symbol,
+    required this.toBaseRatio,
+  });
+
   /// 单位唯一标识
   final String id;
 
@@ -25,13 +32,6 @@ class ConversionUnit {
   ///
   /// 例如：1 千米 = 1000 米，则千米的 toBaseRatio 为 1000.0
   final double toBaseRatio;
-
-  const ConversionUnit({
-    required this.id,
-    required this.name,
-    required this.symbol,
-    required this.toBaseRatio,
-  });
 
   @override
   bool operator ==(Object other) {
