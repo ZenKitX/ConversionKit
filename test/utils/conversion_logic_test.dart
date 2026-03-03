@@ -1,5 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:conversion_kit/conversion_kit.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('ConversionLogic', () {
@@ -9,18 +9,18 @@ void main() {
           id: 'kilometer',
           name: '千米',
           symbol: 'km',
-          toBaseRatio: 1000.0,
+          toBaseRatio: 1000,
         );
 
         const meter = ConversionUnit(
           id: 'meter',
           name: '米',
           symbol: 'm',
-          toBaseRatio: 1.0,
+          toBaseRatio: 1,
         );
 
         final result = ConversionLogic.convert(
-          value: 1.0,
+          value: 1,
           fromUnit: kilometer,
           toUnit: meter,
         );
@@ -33,18 +33,18 @@ void main() {
           id: 'meter',
           name: '米',
           symbol: 'm',
-          toBaseRatio: 1.0,
+          toBaseRatio: 1,
         );
 
         const kilometer = ConversionUnit(
           id: 'kilometer',
           name: '千米',
           symbol: 'km',
-          toBaseRatio: 1000.0,
+          toBaseRatio: 1000,
         );
 
         final result = ConversionLogic.convert(
-          value: 1000.0,
+          value: 1000,
           fromUnit: meter,
           toUnit: kilometer,
         );
@@ -57,11 +57,11 @@ void main() {
           id: 'meter',
           name: '米',
           symbol: 'm',
-          toBaseRatio: 1.0,
+          toBaseRatio: 1,
         );
 
         final result = ConversionLogic.convert(
-          value: 100.0,
+          value: 100,
           fromUnit: meter,
           toUnit: meter,
         );
@@ -186,18 +186,36 @@ void main() {
 
     group('进制输入验证', () {
       test('验证十进制输入', () {
-        expect(ConversionLogic.isValidNumberSystemInput('123', 'decimal'), true);
-        expect(ConversionLogic.isValidNumberSystemInput('abc', 'decimal'), false);
+        expect(
+          ConversionLogic.isValidNumberSystemInput('123', 'decimal'),
+          true,
+        );
+        expect(
+          ConversionLogic.isValidNumberSystemInput('abc', 'decimal'),
+          false,
+        );
       });
 
       test('验证十六进制输入', () {
-        expect(ConversionLogic.isValidNumberSystemInput('FF', 'hexadecimal'), true);
-        expect(ConversionLogic.isValidNumberSystemInput('GG', 'hexadecimal'), false);
+        expect(
+          ConversionLogic.isValidNumberSystemInput('FF', 'hexadecimal'),
+          true,
+        );
+        expect(
+          ConversionLogic.isValidNumberSystemInput('GG', 'hexadecimal'),
+          false,
+        );
       });
 
       test('验证二进制输入', () {
-        expect(ConversionLogic.isValidNumberSystemInput('1010', 'binary'), true);
-        expect(ConversionLogic.isValidNumberSystemInput('1234', 'binary'), false);
+        expect(
+          ConversionLogic.isValidNumberSystemInput('1010', 'binary'),
+          true,
+        );
+        expect(
+          ConversionLogic.isValidNumberSystemInput('1234', 'binary'),
+          false,
+        );
       });
 
       test('空输入有效', () {
@@ -212,7 +230,7 @@ void main() {
       });
 
       test('格式化整数', () {
-        final result = ConversionLogic.formatResult(100.0);
+        final result = ConversionLogic.formatResult(100);
         expect(result, '100');
       });
 

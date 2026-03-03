@@ -102,11 +102,11 @@ class ConversionLogic {
 
     try {
       // 获取进制基数
-      int fromBase = _getBase(fromUnitId);
-      int toBase = _getBase(toUnitId);
+      final fromBase = _getBase(fromUnitId);
+      final toBase = _getBase(toUnitId);
 
       // 先转换为十进制
-      int decimalValue = int.parse(value, radix: fromBase);
+      final decimalValue = int.parse(value, radix: fromBase);
 
       // 再转换为目标进制
       return decimalValue.toRadixString(toBase).toUpperCase();
@@ -144,7 +144,7 @@ class ConversionLogic {
     if (value.isEmpty) return true;
 
     try {
-      int base = _getBase(unitId);
+      final base = _getBase(unitId);
       int.parse(value, radix: base);
       return true;
     } catch (e) {
@@ -169,9 +169,6 @@ class ConversionLogic {
     }
 
     // 移除尾部的零
-    String result = value.toStringAsFixed(8);
-    result = result.replaceAll(RegExp(r'\.?0+$'), '');
-
-    return result;
+    return value.toStringAsFixed(8).replaceAll(RegExp(r'\.?0+$'), '');
   }
 }
