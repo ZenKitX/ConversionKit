@@ -1,269 +1,65 @@
 import '../models/conversion_category.dart';
-import '../models/conversion_unit.dart';
+import 'categories/area_data.dart';
+import 'categories/length_data.dart';
+import 'categories/number_system_data.dart';
+import 'categories/power_data.dart';
+import 'categories/pressure_data.dart';
+import 'categories/speed_data.dart';
+import 'categories/temperature_data.dart';
+import 'categories/volume_data.dart';
+import 'categories/weight_data.dart';
 
 /// 换算数据定义
 ///
-/// 包含所有支持的单位类别和单位定义。
+/// 聚合所有类别的单位数据，提供统一的访问接口。
+///
+/// ## 设计原则
+///
+/// - 单一职责：每个类别数据独立在单独的文件中
+/// - 低耦合：各类别数据互不影响
+/// - 易扩展：添加新类别只需新增文件并在此处引用
+/// - 易维护：修改某类别数据只需修改对应文件
+///
+/// ## 使用示例
+///
+/// ```dart
+/// // 获取所有类别
+/// final categories = ConversionData.categories;
+///
+/// // 查找特定类别
+/// final lengthCategory = ConversionData.findCategoryById('length');
+/// ```
 class ConversionData {
-  /// 长度单位
-  static const lengthUnits = [
-    ConversionUnit(id: 'meter', name: '米', symbol: 'm', toBaseRatio: 1),
-    ConversionUnit(
-      id: 'kilometer',
-      name: '千米',
-      symbol: 'km',
-      toBaseRatio: 1000,
-    ),
-    ConversionUnit(
-      id: 'centimeter',
-      name: '厘米',
-      symbol: 'cm',
-      toBaseRatio: 0.01,
-    ),
-    ConversionUnit(
-      id: 'millimeter',
-      name: '毫米',
-      symbol: 'mm',
-      toBaseRatio: 0.001,
-    ),
-    ConversionUnit(id: 'foot', name: '英尺', symbol: 'ft', toBaseRatio: 0.3048),
-    ConversionUnit(id: 'inch', name: '英寸', symbol: 'in', toBaseRatio: 0.0254),
-    ConversionUnit(id: 'yard', name: '码', symbol: 'yd', toBaseRatio: 0.9144),
-    ConversionUnit(id: 'mile', name: '英里', symbol: 'mi', toBaseRatio: 1609.344),
-  ];
-
-  /// 面积单位
-  static const areaUnits = [
-    ConversionUnit(
-      id: 'square_meter',
-      name: '平方米',
-      symbol: 'm²',
-      toBaseRatio: 1,
-    ),
-    ConversionUnit(
-      id: 'square_kilometer',
-      name: '平方千米',
-      symbol: 'km²',
-      toBaseRatio: 1000000,
-    ),
-    ConversionUnit(
-      id: 'square_centimeter',
-      name: '平方厘米',
-      symbol: 'cm²',
-      toBaseRatio: 0.0001,
-    ),
-    ConversionUnit(id: 'hectare', name: '公顷', symbol: 'ha', toBaseRatio: 10000),
-    ConversionUnit(id: 'mu', name: '亩', symbol: '亩', toBaseRatio: 666.67),
-    ConversionUnit(
-      id: 'square_foot',
-      name: '平方英尺',
-      symbol: 'ft²',
-      toBaseRatio: 0.092903,
-    ),
-    ConversionUnit(
-      id: 'square_mile',
-      name: '平方英里',
-      symbol: 'mi²',
-      toBaseRatio: 2589988.11,
-    ),
-  ];
-
-  /// 重量单位
-  static const weightUnits = [
-    ConversionUnit(id: 'kilogram', name: '千克', symbol: 'kg', toBaseRatio: 1),
-    ConversionUnit(id: 'gram', name: '克', symbol: 'g', toBaseRatio: 0.001),
-    ConversionUnit(
-      id: 'milligram',
-      name: '毫克',
-      symbol: 'mg',
-      toBaseRatio: 0.000001,
-    ),
-    ConversionUnit(id: 'ton', name: '吨', symbol: 't', toBaseRatio: 1000),
-    ConversionUnit(id: 'pound', name: '磅', symbol: 'lb', toBaseRatio: 0.453592),
-    ConversionUnit(
-      id: 'ounce',
-      name: '盎司',
-      symbol: 'oz',
-      toBaseRatio: 0.0283495,
-    ),
-    ConversionUnit(id: 'jin', name: '斤', symbol: '斤', toBaseRatio: 0.5),
-    ConversionUnit(id: 'liang', name: '两', symbol: '两', toBaseRatio: 0.05),
-  ];
-
-  /// 温度单位（特殊处理，不使用 toBaseRatio）
-  static const temperatureUnits = [
-    ConversionUnit(id: 'celsius', name: '摄氏度', symbol: '°C', toBaseRatio: 1),
-    ConversionUnit(id: 'fahrenheit', name: '华氏度', symbol: '°F', toBaseRatio: 1),
-    ConversionUnit(id: 'kelvin', name: '开尔文', symbol: 'K', toBaseRatio: 1),
-  ];
-
-  /// 体积单位
-  static const volumeUnits = [
-    ConversionUnit(
-      id: 'cubic_meter',
-      name: '立方米',
-      symbol: 'm³',
-      toBaseRatio: 1,
-    ),
-    ConversionUnit(id: 'liter', name: '升', symbol: 'L', toBaseRatio: 0.001),
-    ConversionUnit(
-      id: 'milliliter',
-      name: '毫升',
-      symbol: 'mL',
-      toBaseRatio: 0.000001,
-    ),
-    ConversionUnit(
-      id: 'cubic_centimeter',
-      name: '立方厘米',
-      symbol: 'cm³',
-      toBaseRatio: 0.000001,
-    ),
-    ConversionUnit(
-      id: 'gallon',
-      name: '加仑',
-      symbol: 'gal',
-      toBaseRatio: 0.00378541,
-    ),
-    ConversionUnit(
-      id: 'pint',
-      name: '品脱',
-      symbol: 'pt',
-      toBaseRatio: 0.000473176,
-    ),
-    ConversionUnit(
-      id: 'cubic_foot',
-      name: '立方英尺',
-      symbol: 'ft³',
-      toBaseRatio: 0.0283168,
-    ),
-  ];
-
-  /// 速度单位
-  static const speedUnits = [
-    ConversionUnit(
-      id: 'meter_per_second',
-      name: '米/秒',
-      symbol: 'm/s',
-      toBaseRatio: 1,
-    ),
-    ConversionUnit(
-      id: 'kilometer_per_hour',
-      name: '千米/时',
-      symbol: 'km/h',
-      toBaseRatio: 0.277778,
-    ),
-    ConversionUnit(
-      id: 'mile_per_hour',
-      name: '英里/时',
-      symbol: 'mph',
-      toBaseRatio: 0.44704,
-    ),
-    ConversionUnit(id: 'knot', name: '节', symbol: 'kn', toBaseRatio: 0.514444),
-    ConversionUnit(
-      id: 'foot_per_second',
-      name: '英尺/秒',
-      symbol: 'ft/s',
-      toBaseRatio: 0.3048,
-    ),
-  ];
-
-  /// 压强单位
-  static const pressureUnits = [
-    ConversionUnit(id: 'pascal', name: '帕斯卡', symbol: 'Pa', toBaseRatio: 1),
-    ConversionUnit(
-      id: 'kilopascal',
-      name: '千帕',
-      symbol: 'kPa',
-      toBaseRatio: 1000,
-    ),
-    ConversionUnit(
-      id: 'megapascal',
-      name: '兆帕',
-      symbol: 'MPa',
-      toBaseRatio: 1000000,
-    ),
-    ConversionUnit(id: 'bar', name: '巴', symbol: 'bar', toBaseRatio: 100000),
-    ConversionUnit(
-      id: 'atmosphere',
-      name: '大气压',
-      symbol: 'atm',
-      toBaseRatio: 101325,
-    ),
-    ConversionUnit(
-      id: 'mmhg',
-      name: '毫米汞柱',
-      symbol: 'mmHg',
-      toBaseRatio: 133.322,
-    ),
-    ConversionUnit(
-      id: 'psi',
-      name: '磅/平方英寸',
-      symbol: 'psi',
-      toBaseRatio: 6894.76,
-    ),
-  ];
-
-  /// 功率单位
-  static const powerUnits = [
-    ConversionUnit(id: 'watt', name: '瓦特', symbol: 'W', toBaseRatio: 1),
-    ConversionUnit(id: 'kilowatt', name: '千瓦', symbol: 'kW', toBaseRatio: 1000),
-    ConversionUnit(
-      id: 'megawatt',
-      name: '兆瓦',
-      symbol: 'MW',
-      toBaseRatio: 1000000,
-    ),
-    ConversionUnit(
-      id: 'horsepower',
-      name: '马力',
-      symbol: 'hp',
-      toBaseRatio: 745.7,
-    ),
-    ConversionUnit(
-      id: 'btu_per_hour',
-      name: 'BTU/时',
-      symbol: 'BTU/h',
-      toBaseRatio: 0.293071,
-    ),
-  ];
-
-  /// 进制单位（特殊处理）
-  static const numberSystemUnits = [
-    ConversionUnit(id: 'binary', name: '二进制', symbol: 'BIN', toBaseRatio: 2),
-    ConversionUnit(id: 'octal', name: '八进制', symbol: 'OCT', toBaseRatio: 8),
-    ConversionUnit(id: 'decimal', name: '十进制', symbol: 'DEC', toBaseRatio: 10),
-    ConversionUnit(
-      id: 'hexadecimal',
-      name: '十六进制',
-      symbol: 'HEX',
-      toBaseRatio: 16,
-    ),
-  ];
-
-  /// 所有类别
+  /// 所有类别列表
+  ///
+  /// 包含 9 大类别：
+  /// - 长度 (length)
+  /// - 面积 (area)
+  /// - 重量 (weight)
+  /// - 温度 (temperature) - 特殊类别
+  /// - 体积 (volume)
+  /// - 速度 (speed)
+  /// - 压强 (pressure)
+  /// - 功率 (power)
+  /// - 进制 (number_system) - 特殊类别
   static final categories = [
-    const ConversionCategory(id: 'length', name: '长度', units: lengthUnits),
-    const ConversionCategory(id: 'area', name: '面积', units: areaUnits),
-    const ConversionCategory(id: 'weight', name: '重量', units: weightUnits),
-    const ConversionCategory(
-      id: 'temperature',
-      name: '温度',
-      units: temperatureUnits,
-      isSpecial: true,
-    ),
-    const ConversionCategory(id: 'volume', name: '体积', units: volumeUnits),
-    const ConversionCategory(id: 'speed', name: '速度', units: speedUnits),
-    const ConversionCategory(id: 'pressure', name: '压强', units: pressureUnits),
-    const ConversionCategory(id: 'power', name: '功率', units: powerUnits),
-    const ConversionCategory(
-      id: 'number_system',
-      name: '进制',
-      units: numberSystemUnits,
-      isSpecial: true,
-    ),
+    LengthData.category,
+    AreaData.category,
+    WeightData.category,
+    TemperatureData.category,
+    VolumeData.category,
+    SpeedData.category,
+    PressureData.category,
+    PowerData.category,
+    NumberSystemData.category,
   ];
 
   /// 根据 ID 查找类别
+  ///
+  /// 参数:
+  /// - [categoryId]: 类别 ID
+  ///
+  /// 返回找到的类别，如果不存在返回 null。
   static ConversionCategory? findCategoryById(String categoryId) {
     try {
       return categories.firstWhere((category) => category.id == categoryId);
