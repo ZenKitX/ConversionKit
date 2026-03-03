@@ -25,8 +25,18 @@ class AreaData {
       symbol: 'cm²',
       toBaseRatio: 0.0001,
     ),
-    ConversionUnit(id: 'hectare', name: '公顷', symbol: 'ha', toBaseRatio: 10000),
-    ConversionUnit(id: 'mu', name: '亩', symbol: '亩', toBaseRatio: 666.67),
+    ConversionUnit(
+      id: 'hectare',
+      name: '公顷',
+      symbol: 'ha',
+      toBaseRatio: 10000,
+    ),
+    ConversionUnit(
+      id: 'mu',
+      name: '亩',
+      symbol: '亩',
+      toBaseRatio: 666.67,
+    ),
     ConversionUnit(
       id: 'square_foot',
       name: '平方英尺',

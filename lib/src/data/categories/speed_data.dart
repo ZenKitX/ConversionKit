@@ -25,7 +25,12 @@ class SpeedData {
       symbol: 'mph',
       toBaseRatio: 0.44704,
     ),
-    ConversionUnit(id: 'knot', name: '节', symbol: 'kn', toBaseRatio: 0.514444),
+    ConversionUnit(
+      id: 'knot',
+      name: '节',
+      symbol: 'kn',
+      toBaseRatio: 0.514444,
+    ),
     ConversionUnit(
       id: 'foot_per_second',
       name: '英尺/秒',

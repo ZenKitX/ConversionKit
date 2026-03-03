@@ -7,8 +7,18 @@ import '../../models/conversion_unit.dart';
 class PowerData {
   /// 功率单位列表
   static const units = [
-    ConversionUnit(id: 'watt', name: '瓦特', symbol: 'W', toBaseRatio: 1),
-    ConversionUnit(id: 'kilowatt', name: '千瓦', symbol: 'kW', toBaseRatio: 1000),
+    ConversionUnit(
+      id: 'watt',
+      name: '瓦特',
+      symbol: 'W',
+      toBaseRatio: 1,
+    ),
+    ConversionUnit(
+      id: 'kilowatt',
+      name: '千瓦',
+      symbol: 'kW',
+      toBaseRatio: 1000,
+    ),
     ConversionUnit(
       id: 'megawatt',
       name: '兆瓦',
