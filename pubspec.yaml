@@ -1,6 +1,6 @@
 name: conversion_kit
-description: "单位换算工具包 - 提供长度、面积、重量、温度等多种单位的转换功能"
-version: 0.1.0
+description: "单位换算工具包 - 提供单位换算、汇率转换、房贷计算等功能"
+version: 0.2.0
 homepage: https://github.com/ZenKitX/ConversionKit
 repository: https://github.com/ZenKitX/ConversionKit
 issue_tracker: https://github.com/ZenKitX/ConversionKit/issues
