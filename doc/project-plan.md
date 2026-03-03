@@ -113,7 +113,7 @@ conversion_kit/
 │   ├── unit_conversion_example.dart     # 单位换算示例
 │   ├── currency_example.dart            # 汇率换算示例
 │   └── mortgage_example.dart            # 房贷计算示例
-├── docs/                                # 文档
+├── doc/                                # 文档
 │   ├── ARCHITECTURE.md                  # 架构设计文档
 │   ├── CODE_STYLE.md                    # 代码风格指南
 │   ├── CONTRIBUTING.md                  # 贡献指南

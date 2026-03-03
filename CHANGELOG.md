@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - 支持组合贷款（商业贷款 + 公积金贷款）
   - 生成完整的还款计划表
   - 房贷计算器示例文件
-- 架构设计文档（`docs/ARCHITECTURE.md`）
+- 架构设计文档（`doc/ARCHITECTURE.md`）
   - SOLID 设计原则说明
   - 完整的目录结构
   - 模块划分说明
@@ -46,7 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Documentation
 
-- 更新项目计划（`docs/project-plan.md`）
+- 更新项目计划（`doc/project-plan.md`）
   - 添加数据组织原则部分
   - 明确 v0.2.0 功能范围
 - 添加使用示例

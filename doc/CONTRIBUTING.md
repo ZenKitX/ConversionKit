@@ -42,7 +42,7 @@ git checkout -b feat/your-feature-name
 git checkout -b fix/your-bug-fix
 
 # 文档分支
-git checkout -b docs/your-doc-update
+git checkout -b doc/your-doc-update
 ```
 
 ### 2. 编写代码

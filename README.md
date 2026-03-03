@@ -365,7 +365,7 @@ flutter analyze
 6. **模块化**: 按功能模块组织代码，低耦合高内聚
 7. **SOLID 原则**: 遵循单一职责、开闭原则等设计原则
 
-详细的架构设计请参考 [ARCHITECTURE.md](docs/ARCHITECTURE.md)。
+详细的架构设计请参考 [ARCHITECTURE.md](doc/ARCHITECTURE.md)。
 
 ## 许可证
 
