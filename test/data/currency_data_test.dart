@@ -1,4 +1,4 @@
-import 'package:conversion_kit/src/data/currency_data.dart';
+import 'package:conversion_kit/src/data/currencies.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
