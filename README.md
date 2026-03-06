@@ -371,6 +371,10 @@ flutter analyze
 
 MIT License
 
+## 作者
+
+**H1S97X**
+
 ## 贡献
 
 欢迎提交 Issue 和 Pull Request！
