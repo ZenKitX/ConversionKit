@@ -10,6 +10,9 @@
 .svn/
 migrate_working_dir/
 
+# Archive directory (temporary documentation)
+doc/archive/
+
 # IntelliJ related
 *.iml
 *.ipr
