@@ -1,7 +1,7 @@
-import '../data/conversion_data.dart';
+import '../data/conversions.dart';
 import '../models/conversion_category.dart';
 import '../models/conversion_unit.dart';
-import '../utils/conversion_logic.dart';
+import 'conversion_logic.dart';
 
 /// 单位转换器
 ///

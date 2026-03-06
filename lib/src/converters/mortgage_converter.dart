@@ -1,5 +1,5 @@
 import '../models/mortgage.dart';
-import '../utils/mortgage_logic.dart';
+import 'mortgage_logic.dart';
 
 /// 房贷计算器
 ///
