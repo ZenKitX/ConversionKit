@@ -36,9 +36,13 @@ void main() async {
   );
 
   print('价格换算:');
-  print('  美元价格: \$${currencyConverter.formatAmount(value: housePriceUsd, currencyCode: 'USD')} USD');
+  print(
+    '  美元价格: \$${currencyConverter.formatAmount(value: housePriceUsd, currencyCode: 'USD')} USD',
+  );
   if (housePriceCny != null) {
-    print('  人民币价格: ¥${currencyConverter.formatAmount(value: housePriceCny, currencyCode: 'CNY')} CNY\n');
+    print(
+      '  人民币价格: ¥${currencyConverter.formatAmount(value: housePriceCny, currencyCode: 'CNY')} CNY\n',
+    );
   }
 
   // 2. 房贷计算
@@ -56,9 +60,15 @@ void main() async {
   print('贷款计算（等额本息）:');
   print('  贷款金额: \$${mortgageCalculator.formatAmount(loanAmount)} USD');
   print('  首付金额: \$${mortgageCalculator.formatAmount(downPayment)} USD');
-  print('  月供: \$${mortgageCalculator.formatAmount(mortgageResult.monthlyPayment)} USD');
-  print('  还款总额: \$${mortgageCalculator.formatAmount(mortgageResult.totalPayment)} USD');
-  print('  利息总额: \$${mortgageCalculator.formatAmount(mortgageResult.totalInterest)} USD\n');
+  print(
+    '  月供: \$${mortgageCalculator.formatAmount(mortgageResult.monthlyPayment)} USD',
+  );
+  print(
+    '  还款总额: \$${mortgageCalculator.formatAmount(mortgageResult.totalPayment)} USD',
+  );
+  print(
+    '  利息总额: \$${mortgageCalculator.formatAmount(mortgageResult.totalInterest)} USD\n',
+  );
 
   // 3. 月供换算成人民币
   final monthlyPaymentCny = await currencyConverter.convert(
@@ -68,7 +78,9 @@ void main() async {
   );
 
   if (monthlyPaymentCny != null) {
-    print('月供（人民币）: ¥${currencyConverter.formatAmount(value: monthlyPaymentCny, currencyCode: 'CNY')} CNY\n');
+    print(
+      '月供（人民币）: ¥${currencyConverter.formatAmount(value: monthlyPaymentCny, currencyCode: 'CNY')} CNY\n',
+    );
   }
 
   // ============================================================
@@ -92,7 +104,9 @@ void main() async {
   );
 
   print('房屋面积:');
-  print('  ${houseAreaSqft.toStringAsFixed(0)} 平方英尺 = ${houseAreaSqm.toStringAsFixed(2)} 平方米\n');
+  print(
+    '  ${houseAreaSqft.toStringAsFixed(0)} 平方英尺 = ${houseAreaSqm.toStringAsFixed(2)} 平方米\n',
+  );
 
   // 地板材料计算（按平方米计价）
   const floorPricePerSqm = 200.0; // 每平方米 200 元
@@ -100,7 +114,9 @@ void main() async {
 
   print('地板材料:');
   print('  单价: ¥${floorPricePerSqm.toStringAsFixed(0)}/平方米');
-  print('  总价: ¥${currencyConverter.formatAmount(value: totalFloorCost, currencyCode: 'CNY')} CNY\n');
+  print(
+    '  总价: ¥${currencyConverter.formatAmount(value: totalFloorCost, currencyCode: 'CNY')} CNY\n',
+  );
 
   // 油漆用量计算（按加仑购买）
   const paintCoveragePerGallon = 400.0; // 每加仑覆盖 400 平方英尺
@@ -138,8 +154,10 @@ void main() async {
     );
 
     if (priceCny != null) {
-      print('  $currency: $symbol${currencyConverter.formatAmount(value: price, currencyCode: currency)} '
-          '≈ ¥${currencyConverter.formatAmount(value: priceCny, currencyCode: 'CNY')} CNY');
+      print(
+        '  $currency: $symbol${currencyConverter.formatAmount(value: price, currencyCode: currency)} '
+        '≈ ¥${currencyConverter.formatAmount(value: priceCny, currencyCode: 'CNY')} CNY',
+      );
     }
   }
   print('');
@@ -187,7 +205,9 @@ void main() async {
   print('  利率: ${(commercialRate * 100).toStringAsFixed(2)}%');
   print('  首月月供: ¥${mortgageCalculator.formatAmount(plan2.monthlyPayment)} 元');
   print('  利息总额: ¥${mortgageCalculator.formatAmount(plan2.totalInterest)} 元');
-  print('  节省利息: ¥${mortgageCalculator.formatAmount(plan1.totalInterest - plan2.totalInterest)} 元\n');
+  print(
+    '  节省利息: ¥${mortgageCalculator.formatAmount(plan1.totalInterest - plan2.totalInterest)} 元\n',
+  );
 
   // 方案 3: 组合贷款
   final plan3 = mortgageCalculator.calculateCombination(
@@ -204,13 +224,17 @@ void main() async {
   print('  公积金利率: ${(providentRate * 100).toStringAsFixed(2)}%');
   print('  月供: ¥${mortgageCalculator.formatAmount(plan3.monthlyPayment)} 元');
   print('  利息总额: ¥${mortgageCalculator.formatAmount(plan3.totalInterest)} 元');
-  print('  比方案 1 节省: ¥${mortgageCalculator.formatAmount(plan1.totalInterest - plan3.totalInterest)} 元\n');
+  print(
+    '  比方案 1 节省: ¥${mortgageCalculator.formatAmount(plan1.totalInterest - plan3.totalInterest)} 元\n',
+  );
 
   // 推荐方案
   print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   print('推荐方案: 组合贷款');
   print('  理由: 利息最低，月供适中');
-  print('  相比纯商业贷款节省: ¥${mortgageCalculator.formatAmount(plan1.totalInterest - plan3.totalInterest)} 元');
+  print(
+    '  相比纯商业贷款节省: ¥${mortgageCalculator.formatAmount(plan1.totalInterest - plan3.totalInterest)} 元',
+  );
   print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 
   print('✨ ConversionKit - 让换算更简单！');

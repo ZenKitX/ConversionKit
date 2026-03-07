@@ -5,13 +5,14 @@ class CurrencyConverterScreen extends StatefulWidget {
   const CurrencyConverterScreen({super.key});
 
   @override
-  State<CurrencyConverterScreen> createState() => _CurrencyConverterScreenState();
+  State<CurrencyConverterScreen> createState() =>
+      _CurrencyConverterScreenState();
 }
 
 class _CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
   final _converter = CurrencyConverter();
   final _inputController = TextEditingController(text: '100');
-  
+
   String _fromCurrency = 'USD';
   String _toCurrency = 'CNY';
   String _result = '';
@@ -82,7 +83,10 @@ class _CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text('输入金额', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const Text(
+              '输入金额',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             TextField(
               controller: _inputController,
@@ -90,11 +94,16 @@ class _CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
                 border: OutlineInputBorder(),
                 hintText: '请输入金额',
               ),
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
               onChanged: (_) => _convert(),
             ),
             const SizedBox(height: 24),
-            const Text('从', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const Text(
+              '从',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             DropdownButtonFormField<String>(
               value: _fromCurrency,
@@ -102,7 +111,9 @@ class _CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
               items: _currencies.map((currency) {
                 return DropdownMenuItem(
                   value: currency.code,
-                  child: Text('${currency.symbol} ${currency.name} (${currency.code})'),
+                  child: Text(
+                    '${currency.symbol} ${currency.name} (${currency.code})',
+                  ),
                 );
               }).toList(),
               onChanged: (value) {
@@ -127,7 +138,10 @@ class _CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            const Text('到', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const Text(
+              '到',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             DropdownButtonFormField<String>(
               value: _toCurrency,
@@ -135,7 +149,9 @@ class _CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
               items: _currencies.map((currency) {
                 return DropdownMenuItem(
                   value: currency.code,
-                  child: Text('${currency.symbol} ${currency.name} (${currency.code})'),
+                  child: Text(
+                    '${currency.symbol} ${currency.name} (${currency.code})',
+                  ),
                 );
               }).toList(),
               onChanged: (value) {
@@ -155,14 +171,20 @@ class _CurrencyConverterScreenState extends State<CurrencyConverterScreen> {
                   children: [
                     const Text(
                       '转换结果',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 8),
                     _isLoading
                         ? const Center(child: CircularProgressIndicator())
                         : Text(
                             _result.isEmpty ? '等待输入...' : _result,
-                            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                   ],
                 ),

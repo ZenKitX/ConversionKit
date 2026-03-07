@@ -5,7 +5,8 @@ class MortgageCalculatorScreen extends StatefulWidget {
   const MortgageCalculatorScreen({super.key});
 
   @override
-  State<MortgageCalculatorScreen> createState() => _MortgageCalculatorScreenState();
+  State<MortgageCalculatorScreen> createState() =>
+      _MortgageCalculatorScreenState();
 }
 
 class _MortgageCalculatorScreenState extends State<MortgageCalculatorScreen> {
@@ -13,7 +14,7 @@ class _MortgageCalculatorScreenState extends State<MortgageCalculatorScreen> {
   final _principalController = TextEditingController(text: '1000000');
   final _rateController = TextEditingController(text: '4.9');
   final _yearsController = TextEditingController(text: '30');
-  
+
   MortgageType _mortgageType = MortgageType.equalPayment;
   MortgageResult? _result;
 
@@ -58,7 +59,10 @@ class _MortgageCalculatorScreenState extends State<MortgageCalculatorScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text('贷款金额（元）', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const Text(
+              '贷款金额（元）',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             TextField(
               controller: _principalController,
@@ -66,11 +70,16 @@ class _MortgageCalculatorScreenState extends State<MortgageCalculatorScreen> {
                 border: OutlineInputBorder(),
                 hintText: '请输入贷款金额',
               ),
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
               onChanged: (_) => _calculate(),
             ),
             const SizedBox(height: 16),
-            const Text('年利率（%）', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const Text(
+              '年利率（%）',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             TextField(
               controller: _rateController,
@@ -78,11 +87,16 @@ class _MortgageCalculatorScreenState extends State<MortgageCalculatorScreen> {
                 border: OutlineInputBorder(),
                 hintText: '请输入年利率',
               ),
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
               onChanged: (_) => _calculate(),
             ),
             const SizedBox(height: 16),
-            const Text('贷款年限', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const Text(
+              '贷款年限',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             TextField(
               controller: _yearsController,
@@ -94,7 +108,10 @@ class _MortgageCalculatorScreenState extends State<MortgageCalculatorScreen> {
               onChanged: (_) => _calculate(),
             ),
             const SizedBox(height: 16),
-            const Text('还款方式', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const Text(
+              '还款方式',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             SegmentedButton<MortgageType>(
               segments: const [
@@ -126,7 +143,10 @@ class _MortgageCalculatorScreenState extends State<MortgageCalculatorScreen> {
                     children: [
                       const Text(
                         '计算结果',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const Divider(height: 24),
                       _buildResultRow(
@@ -217,10 +237,18 @@ class _MortgageCalculatorScreenState extends State<MortgageCalculatorScreen> {
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 8),
-                      Text('月供: ¥${_calculator.formatAmount(payment.payment, decimals: 0)}'),
-                      Text('本金: ¥${_calculator.formatAmount(payment.principal, decimals: 0)}'),
-                      Text('利息: ¥${_calculator.formatAmount(payment.interest, decimals: 0)}'),
-                      Text('剩余: ¥${_calculator.formatAmount(payment.remainingPrincipal, decimals: 0)}'),
+                      Text(
+                        '月供: ¥${_calculator.formatAmount(payment.payment, decimals: 0)}',
+                      ),
+                      Text(
+                        '本金: ¥${_calculator.formatAmount(payment.principal, decimals: 0)}',
+                      ),
+                      Text(
+                        '利息: ¥${_calculator.formatAmount(payment.interest, decimals: 0)}',
+                      ),
+                      Text(
+                        '剩余: ¥${_calculator.formatAmount(payment.remainingPrincipal, decimals: 0)}',
+                      ),
                     ],
                   ),
                 ),

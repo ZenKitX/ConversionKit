@@ -136,7 +136,8 @@ class MortgageCalculator {
     );
 
     // 合并结果
-    final totalMonthlyPayment = commercial.monthlyPayment + provident.monthlyPayment;
+    final totalMonthlyPayment =
+        commercial.monthlyPayment + provident.monthlyPayment;
     final totalPayment = commercial.totalPayment + provident.totalPayment;
     final totalInterest = commercial.totalInterest + provident.totalInterest;
 

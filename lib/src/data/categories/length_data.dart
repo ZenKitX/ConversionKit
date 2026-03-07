@@ -7,12 +7,7 @@ import '../../models/conversion_unit.dart';
 class LengthData {
   /// 长度单位列表
   static const units = [
-    ConversionUnit(
-      id: 'meter',
-      name: '米',
-      symbol: 'm',
-      toBaseRatio: 1,
-    ),
+    ConversionUnit(id: 'meter', name: '米', symbol: 'm', toBaseRatio: 1),
     ConversionUnit(
       id: 'kilometer',
       name: '千米',
@@ -31,30 +26,10 @@ class LengthData {
       symbol: 'mm',
       toBaseRatio: 0.001,
     ),
-    ConversionUnit(
-      id: 'foot',
-      name: '英尺',
-      symbol: 'ft',
-      toBaseRatio: 0.3048,
-    ),
-    ConversionUnit(
-      id: 'inch',
-      name: '英寸',
-      symbol: 'in',
-      toBaseRatio: 0.0254,
-    ),
-    ConversionUnit(
-      id: 'yard',
-      name: '码',
-      symbol: 'yd',
-      toBaseRatio: 0.9144,
-    ),
-    ConversionUnit(
-      id: 'mile',
-      name: '英里',
-      symbol: 'mi',
-      toBaseRatio: 1609.344,
-    ),
+    ConversionUnit(id: 'foot', name: '英尺', symbol: 'ft', toBaseRatio: 0.3048),
+    ConversionUnit(id: 'inch', name: '英寸', symbol: 'in', toBaseRatio: 0.0254),
+    ConversionUnit(id: 'yard', name: '码', symbol: 'yd', toBaseRatio: 0.9144),
+    ConversionUnit(id: 'mile', name: '英里', symbol: 'mi', toBaseRatio: 1609.344),
   ];
 
   /// 长度类别

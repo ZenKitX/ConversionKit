@@ -245,17 +245,26 @@ void main() {
       });
 
       test('十进制只能包含0-9', () {
-        expect(converter.isValidNumberSystemInput('1234567890', 'decimal'), true);
+        expect(
+          converter.isValidNumberSystemInput('1234567890', 'decimal'),
+          true,
+        );
         expect(converter.isValidNumberSystemInput('A', 'decimal'), false);
       });
 
       test('十六进制可以包含0-9和A-F', () {
-        expect(converter.isValidNumberSystemInput('0123456789ABCDEF', 'hexadecimal'), true);
+        expect(
+          converter.isValidNumberSystemInput('0123456789ABCDEF', 'hexadecimal'),
+          true,
+        );
         expect(converter.isValidNumberSystemInput('G', 'hexadecimal'), false);
       });
 
       test('十六进制小写字母', () {
-        expect(converter.isValidNumberSystemInput('abcdef', 'hexadecimal'), true);
+        expect(
+          converter.isValidNumberSystemInput('abcdef', 'hexadecimal'),
+          true,
+        );
       });
 
       test('前导零', () {
@@ -302,21 +311,21 @@ void main() {
       test('极小差异转换', () {
         final value1 = 1.0;
         final value2 = 1.0 + double.minPositive;
-        
+
         final result1 = converter.convert(
           value: value1,
           categoryId: 'length',
           fromUnitId: 'meter',
           toUnitId: 'kilometer',
         );
-        
+
         final result2 = converter.convert(
           value: value2,
           categoryId: 'length',
           fromUnitId: 'meter',
           toUnitId: 'kilometer',
         );
-        
+
         // 由于浮点精度限制，极小差异可能在转换后消失
         // 我们只验证两个结果都是有效的数字
         expect(result1.isFinite, true);
@@ -417,14 +426,14 @@ void main() {
           fromUnitId: 'meter',
           toUnitId: 'kilometer',
         );
-        
+
         final step2 = converter.convert(
           value: step1,
           categoryId: 'length',
           fromUnitId: 'kilometer',
           toUnitId: 'centimeter',
         );
-        
+
         // 直接转换
         final direct = converter.convert(
           value: 1000,
@@ -432,35 +441,35 @@ void main() {
           fromUnitId: 'meter',
           toUnitId: 'centimeter',
         );
-        
+
         expect(step2, closeTo(direct, 1e-10));
       });
 
       test('温度链式转换', () {
         // 摄氏度 -> 华氏度 -> 开尔文 -> 摄氏度
         double value = 100.0;
-        
+
         value = converter.convert(
           value: value,
           categoryId: 'temperature',
           fromUnitId: 'celsius',
           toUnitId: 'fahrenheit',
         );
-        
+
         value = converter.convert(
           value: value,
           categoryId: 'temperature',
           fromUnitId: 'fahrenheit',
           toUnitId: 'kelvin',
         );
-        
+
         value = converter.convert(
           value: value,
           categoryId: 'temperature',
           fromUnitId: 'kelvin',
           toUnitId: 'celsius',
         );
-        
+
         expect(value, closeTo(100.0, 1e-10));
       });
     });
@@ -529,21 +538,23 @@ void main() {
       test('转换的线性性', () {
         // 2 * convert(x) = convert(2 * x)
         final x = 100.0;
-        
-        final result1 = 2 * converter.convert(
-          value: x,
-          categoryId: 'length',
-          fromUnitId: 'meter',
-          toUnitId: 'kilometer',
-        );
-        
+
+        final result1 =
+            2 *
+            converter.convert(
+              value: x,
+              categoryId: 'length',
+              fromUnitId: 'meter',
+              toUnitId: 'kilometer',
+            );
+
         final result2 = converter.convert(
           value: 2 * x,
           categoryId: 'length',
           fromUnitId: 'meter',
           toUnitId: 'kilometer',
         );
-        
+
         expect(result1, closeTo(result2, 1e-10));
       });
 
@@ -551,26 +562,28 @@ void main() {
         // convert(a) + convert(b) = convert(a + b)
         final a = 50.0;
         final b = 30.0;
-        
-        final result1 = converter.convert(
-          value: a,
-          categoryId: 'length',
-          fromUnitId: 'meter',
-          toUnitId: 'kilometer',
-        ) + converter.convert(
-          value: b,
-          categoryId: 'length',
-          fromUnitId: 'meter',
-          toUnitId: 'kilometer',
-        );
-        
+
+        final result1 =
+            converter.convert(
+              value: a,
+              categoryId: 'length',
+              fromUnitId: 'meter',
+              toUnitId: 'kilometer',
+            ) +
+            converter.convert(
+              value: b,
+              categoryId: 'length',
+              fromUnitId: 'meter',
+              toUnitId: 'kilometer',
+            );
+
         final result2 = converter.convert(
           value: a + b,
           categoryId: 'length',
           fromUnitId: 'meter',
           toUnitId: 'kilometer',
         );
-        
+
         expect(result1, closeTo(result2, 1e-10));
       });
     });

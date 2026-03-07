@@ -40,7 +40,8 @@ void main() {
 
   // 示例 3: 对比两种还款方式
   print('示例 3: 对比两种还款方式');
-  final interestDiff = equalPayment.totalInterest - equalPrincipal.totalInterest;
+  final interestDiff =
+      equalPayment.totalInterest - equalPrincipal.totalInterest;
   print('等额本息比等额本金多付利息: ${calculator.formatAmount(interestDiff)} 元');
   print('');
 

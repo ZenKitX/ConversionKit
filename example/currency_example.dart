@@ -11,18 +11,10 @@ void main() async {
 
   // 示例 1: 基本货币转换
   print('示例 1: 基本货币转换');
-  final usdToCny = await converter.convert(
-    value: 100,
-    from: 'USD',
-    to: 'CNY',
-  );
+  final usdToCny = await converter.convert(value: 100, from: 'USD', to: 'CNY');
   print('100 USD = ${usdToCny?.toStringAsFixed(2)} CNY');
 
-  final eurToUsd = await converter.convert(
-    value: 100,
-    from: 'EUR',
-    to: 'USD',
-  );
+  final eurToUsd = await converter.convert(value: 100, from: 'EUR', to: 'USD');
   print('100 EUR = ${eurToUsd?.toStringAsFixed(2)} USD\n');
 
   // 示例 2: 批量转换

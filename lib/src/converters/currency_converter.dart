@@ -24,7 +24,7 @@ class CurrencyConverter {
   /// 参数:
   /// - [apiService]: 汇率 API 服务，默认使用模拟服务
   CurrencyConverter({CurrencyApiService? apiService})
-      : _apiService = apiService ?? MockCurrencyApiService();
+    : _apiService = apiService ?? MockCurrencyApiService();
 
   final CurrencyApiService _apiService;
 

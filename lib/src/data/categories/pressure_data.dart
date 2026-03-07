@@ -7,12 +7,7 @@ import '../../models/conversion_unit.dart';
 class PressureData {
   /// 压强单位列表
   static const units = [
-    ConversionUnit(
-      id: 'pascal',
-      name: '帕斯卡',
-      symbol: 'Pa',
-      toBaseRatio: 1,
-    ),
+    ConversionUnit(id: 'pascal', name: '帕斯卡', symbol: 'Pa', toBaseRatio: 1),
     ConversionUnit(
       id: 'kilopascal',
       name: '千帕',
@@ -25,12 +20,7 @@ class PressureData {
       symbol: 'MPa',
       toBaseRatio: 1000000,
     ),
-    ConversionUnit(
-      id: 'bar',
-      name: '巴',
-      symbol: 'bar',
-      toBaseRatio: 100000,
-    ),
+    ConversionUnit(id: 'bar', name: '巴', symbol: 'bar', toBaseRatio: 100000),
     ConversionUnit(
       id: 'atmosphere',
       name: '大气压',

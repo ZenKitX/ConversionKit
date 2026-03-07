@@ -12,14 +12,14 @@ void main() {
           symbol: 'Z',
           toBaseRatio: 0,
         );
-        
+
         final normalUnit = ConversionUnit(
           id: 'normal',
           name: '正常单位',
           symbol: 'N',
           toBaseRatio: 1,
         );
-        
+
         // 从零单位转换应该得到0
         final result1 = ConversionLogic.convert(
           value: 100,
@@ -27,7 +27,7 @@ void main() {
           toUnit: normalUnit,
         );
         expect(result1, 0.0);
-        
+
         // 转换到零单位会导致除以零，应该得到无穷大
         final result2 = ConversionLogic.convert(
           value: 100,
@@ -44,14 +44,14 @@ void main() {
           symbol: 'H',
           toBaseRatio: double.maxFinite,
         );
-        
+
         final normalUnit = ConversionUnit(
           id: 'normal',
           name: '正常单位',
           symbol: 'N',
           toBaseRatio: 1,
         );
-        
+
         final result = ConversionLogic.convert(
           value: 1,
           fromUnit: hugeUnit,
@@ -67,14 +67,14 @@ void main() {
           symbol: 'T',
           toBaseRatio: double.minPositive,
         );
-        
+
         final normalUnit = ConversionUnit(
           id: 'normal',
           name: '正常单位',
           symbol: 'N',
           toBaseRatio: 1,
         );
-        
+
         final result = ConversionLogic.convert(
           value: 1,
           fromUnit: tinyUnit,
@@ -90,14 +90,14 @@ void main() {
           symbol: '-N',
           toBaseRatio: -1,
         );
-        
+
         final normalUnit = ConversionUnit(
           id: 'normal',
           name: '正常单位',
           symbol: 'N',
           toBaseRatio: 1,
         );
-        
+
         final result = ConversionLogic.convert(
           value: 100,
           fromUnit: negativeUnit,
@@ -113,14 +113,14 @@ void main() {
           symbol: '∞',
           toBaseRatio: double.infinity,
         );
-        
+
         final normalUnit = ConversionUnit(
           id: 'normal',
           name: '正常单位',
           symbol: 'N',
           toBaseRatio: 1,
         );
-        
+
         final result = ConversionLogic.convert(
           value: 1,
           fromUnit: infiniteUnit,
@@ -141,7 +141,7 @@ void main() {
           ),
           0.0,
         );
-        
+
         // 华氏度零点
         expect(
           ConversionLogic.convertTemperature(
@@ -151,7 +151,7 @@ void main() {
           ),
           0.0,
         );
-        
+
         // 开尔文零点（绝对零度）
         expect(
           ConversionLogic.convertTemperature(
@@ -166,7 +166,7 @@ void main() {
       test('温度转换的对称性', () {
         final temps = [0.0, 100.0, -40.0, 273.15, 1000.0];
         final units = ['celsius', 'fahrenheit', 'kelvin'];
-        
+
         for (final temp in temps) {
           for (final from in units) {
             for (final to in units) {
@@ -175,13 +175,13 @@ void main() {
                 fromUnitId: from,
                 toUnitId: to,
               );
-              
+
               final backward = ConversionLogic.convertTemperature(
                 value: forward,
                 fromUnitId: to,
                 toUnitId: from,
               );
-              
+
               expect(backward, closeTo(temp, 1e-10));
             }
           }
@@ -196,7 +196,7 @@ void main() {
           toUnitId: 'kelvin',
         );
         expect(highTemp, 1000273.15);
-        
+
         // 极低温度（低于绝对零度，物理上不可能但测试数学处理）
         final lowTemp = ConversionLogic.convertTemperature(
           value: -300,
@@ -215,7 +215,7 @@ void main() {
           ),
           double.infinity,
         );
-        
+
         expect(
           ConversionLogic.convertTemperature(
             value: double.negativeInfinity,
@@ -243,7 +243,7 @@ void main() {
           toUnitId: 'celsius',
         );
         expect(result1, 100.0);
-        
+
         // 未知目标单位，应该返回摄氏度值
         final result2 = ConversionLogic.convertTemperature(
           value: 100,
@@ -263,7 +263,7 @@ void main() {
           ),
           32.0,
         );
-        
+
         // 水的沸点
         expect(
           ConversionLogic.convertTemperature(
@@ -273,7 +273,7 @@ void main() {
           ),
           212.0,
         );
-        
+
         // 人体温度
         expect(
           ConversionLogic.convertTemperature(
@@ -289,7 +289,7 @@ void main() {
     group('进制转换边界测试', () {
       test('所有进制的零值', () {
         final bases = ['binary', 'octal', 'decimal', 'hexadecimal'];
-        
+
         for (final from in bases) {
           for (final to in bases) {
             final result = ConversionLogic.convertNumberSystem(
@@ -306,14 +306,14 @@ void main() {
         // Dart int 的最大值在不同平台可能不同
         // 使用一个安全的大数值
         final largeNumber = '9223372036854775807'; // 2^63 - 1
-        
+
         final hex = ConversionLogic.convertNumberSystem(
           value: largeNumber,
           fromUnitId: 'decimal',
           toUnitId: 'hexadecimal',
         );
         expect(hex, '7FFFFFFFFFFFFFFF');
-        
+
         // 转换回来验证
         final back = ConversionLogic.convertNumberSystem(
           value: hex,
@@ -326,26 +326,26 @@ void main() {
       test('进制转换的循环性', () {
         final testValues = ['0', '1', '10', '100', '255'];
         final bases = ['binary', 'octal', 'decimal', 'hexadecimal'];
-        
+
         for (final value in testValues) {
           for (int i = 0; i < bases.length; i++) {
             String current = value;
-            
+
             // 循环转换所有进制
             for (int j = 0; j < bases.length; j++) {
               final from = bases[(i + j) % bases.length];
               final to = bases[(i + j + 1) % bases.length];
-              
+
               current = ConversionLogic.convertNumberSystem(
                 value: current,
                 fromUnitId: from,
                 toUnitId: to,
               );
-              
+
               // 如果转换失败（返回空字符串），跳过此测试
               if (current.isEmpty) break;
             }
-            
+
             // 只有成功完成所有转换才验证
             if (current.isNotEmpty) {
               expect(current, value);
@@ -364,7 +364,7 @@ void main() {
           ),
           '',
         );
-        
+
         // 二进制包含2
         expect(
           ConversionLogic.convertNumberSystem(
@@ -374,7 +374,7 @@ void main() {
           ),
           '',
         );
-        
+
         // 八进制包含8
         expect(
           ConversionLogic.convertNumberSystem(
@@ -395,7 +395,7 @@ void main() {
           ),
           '',
         );
-        
+
         expect(
           ConversionLogic.convertNumberSystem(
             value: '12 34',
@@ -404,7 +404,7 @@ void main() {
           ),
           '',
         );
-        
+
         expect(
           ConversionLogic.convertNumberSystem(
             value: '12.34',
@@ -422,13 +422,13 @@ void main() {
           fromUnitId: 'hexadecimal',
           toUnitId: 'decimal',
         );
-        
+
         final upper = ConversionLogic.convertNumberSystem(
           value: 'ABC',
           fromUnitId: 'hexadecimal',
           toUnitId: 'decimal',
         );
-        
+
         expect(lower, upper);
         expect(lower, '2748');
       });
@@ -442,7 +442,7 @@ void main() {
           ),
           '7B',
         );
-        
+
         expect(
           ConversionLogic.convertNumberSystem(
             value: '0000',
@@ -459,7 +459,10 @@ void main() {
         expect(ConversionLogic.isValidNumberSystemInput('', 'binary'), true);
         expect(ConversionLogic.isValidNumberSystemInput('', 'octal'), true);
         expect(ConversionLogic.isValidNumberSystemInput('', 'decimal'), true);
-        expect(ConversionLogic.isValidNumberSystemInput('', 'hexadecimal'), true);
+        expect(
+          ConversionLogic.isValidNumberSystemInput('', 'hexadecimal'),
+          true,
+        );
       });
 
       test('单个字符验证', () {
@@ -467,57 +470,112 @@ void main() {
         expect(ConversionLogic.isValidNumberSystemInput('0', 'binary'), true);
         expect(ConversionLogic.isValidNumberSystemInput('1', 'binary'), true);
         expect(ConversionLogic.isValidNumberSystemInput('2', 'binary'), false);
-        
+
         // 八进制
         for (int i = 0; i <= 7; i++) {
           expect(ConversionLogic.isValidNumberSystemInput('$i', 'octal'), true);
         }
         expect(ConversionLogic.isValidNumberSystemInput('8', 'octal'), false);
-        
+
         // 十进制
         for (int i = 0; i <= 9; i++) {
-          expect(ConversionLogic.isValidNumberSystemInput('$i', 'decimal'), true);
+          expect(
+            ConversionLogic.isValidNumberSystemInput('$i', 'decimal'),
+            true,
+          );
         }
         expect(ConversionLogic.isValidNumberSystemInput('A', 'decimal'), false);
-        
+
         // 十六进制
         for (int i = 0; i <= 9; i++) {
-          expect(ConversionLogic.isValidNumberSystemInput('$i', 'hexadecimal'), true);
+          expect(
+            ConversionLogic.isValidNumberSystemInput('$i', 'hexadecimal'),
+            true,
+          );
         }
-        for (var c in ['A', 'B', 'C', 'D', 'E', 'F', 'a', 'b', 'c', 'd', 'e', 'f']) {
-          expect(ConversionLogic.isValidNumberSystemInput(c, 'hexadecimal'), true);
+        for (var c in [
+          'A',
+          'B',
+          'C',
+          'D',
+          'E',
+          'F',
+          'a',
+          'b',
+          'c',
+          'd',
+          'e',
+          'f',
+        ]) {
+          expect(
+            ConversionLogic.isValidNumberSystemInput(c, 'hexadecimal'),
+            true,
+          );
         }
-        expect(ConversionLogic.isValidNumberSystemInput('G', 'hexadecimal'), false);
+        expect(
+          ConversionLogic.isValidNumberSystemInput('G', 'hexadecimal'),
+          false,
+        );
       });
 
       test('长字符串验证', () {
         // int.parse 有长度限制，测试合理长度的字符串
         // 二进制：最多约63位（对于64位int）
         final mediumBinary = '1' * 30;
-        expect(ConversionLogic.isValidNumberSystemInput(mediumBinary, 'binary'), true);
-        
+        expect(
+          ConversionLogic.isValidNumberSystemInput(mediumBinary, 'binary'),
+          true,
+        );
+
         // 十六进制：最多约15位（对于64位int）
         final mediumHex = 'F' * 10;
-        expect(ConversionLogic.isValidNumberSystemInput(mediumHex, 'hexadecimal'), true);
-        
+        expect(
+          ConversionLogic.isValidNumberSystemInput(mediumHex, 'hexadecimal'),
+          true,
+        );
+
         // 超长字符串会因为超出 int 范围而失败
         final veryLongBinary = '1' * 100;
-        final isValid = ConversionLogic.isValidNumberSystemInput(veryLongBinary, 'binary');
+        final isValid = ConversionLogic.isValidNumberSystemInput(
+          veryLongBinary,
+          'binary',
+        );
         // 可能成功也可能失败，取决于平台的 int 大小限制
         expect(isValid is bool, true);
       });
 
       test('混合字符验证', () {
-        expect(ConversionLogic.isValidNumberSystemInput('01010101', 'binary'), true);
-        expect(ConversionLogic.isValidNumberSystemInput('01234567', 'octal'), true);
-        expect(ConversionLogic.isValidNumberSystemInput('0123456789', 'decimal'), true);
-        expect(ConversionLogic.isValidNumberSystemInput('0123456789ABCDEF', 'hexadecimal'), true);
+        expect(
+          ConversionLogic.isValidNumberSystemInput('01010101', 'binary'),
+          true,
+        );
+        expect(
+          ConversionLogic.isValidNumberSystemInput('01234567', 'octal'),
+          true,
+        );
+        expect(
+          ConversionLogic.isValidNumberSystemInput('0123456789', 'decimal'),
+          true,
+        );
+        expect(
+          ConversionLogic.isValidNumberSystemInput(
+            '0123456789ABCDEF',
+            'hexadecimal',
+          ),
+          true,
+        );
       });
 
       test('未知进制处理', () {
         // 未知进制应该默认为十进制
-        expect(ConversionLogic.isValidNumberSystemInput('123', 'unknown'), true);
-        expect(ConversionLogic.isValidNumberSystemInput('ABC', 'unknown'), false);
+        expect(
+          ConversionLogic.isValidNumberSystemInput('123', 'unknown'),
+          true,
+        );
+        expect(
+          ConversionLogic.isValidNumberSystemInput('ABC', 'unknown'),
+          false,
+        );
       });
     });
 
@@ -532,7 +590,7 @@ void main() {
       test('科学计数法阈值', () {
         // 刚好在阈值上
         expect(ConversionLogic.formatResult(0.0001), '0.0001');
-        
+
         // 刚好低于阈值
         expect(ConversionLogic.formatResult(0.00009999), contains('e'));
         expect(ConversionLogic.formatResult(0.00001), contains('e'));
@@ -560,7 +618,10 @@ void main() {
 
       test('特殊值格式化', () {
         expect(ConversionLogic.formatResult(double.infinity), 'Infinity');
-        expect(ConversionLogic.formatResult(double.negativeInfinity), '-Infinity');
+        expect(
+          ConversionLogic.formatResult(double.negativeInfinity),
+          '-Infinity',
+        );
         expect(ConversionLogic.formatResult(double.nan), 'NaN');
       });
 
@@ -584,14 +645,14 @@ void main() {
           symbol: 'U1',
           toBaseRatio: 1,
         );
-        
+
         final unit2 = ConversionUnit(
           id: 'unit2',
           name: '单位2',
           symbol: 'U2',
           toBaseRatio: 1000,
         );
-        
+
         for (int i = 0; i < 10000; i++) {
           final result = ConversionLogic.convert(
             value: i.toDouble(),

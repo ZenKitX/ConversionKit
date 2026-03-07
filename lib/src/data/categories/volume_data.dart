@@ -13,12 +13,7 @@ class VolumeData {
       symbol: 'm³',
       toBaseRatio: 1,
     ),
-    ConversionUnit(
-      id: 'liter',
-      name: '升',
-      symbol: 'L',
-      toBaseRatio: 0.001,
-    ),
+    ConversionUnit(id: 'liter', name: '升', symbol: 'L', toBaseRatio: 0.001),
     ConversionUnit(
       id: 'milliliter',
       name: '毫升',

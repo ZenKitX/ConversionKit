@@ -7,24 +7,9 @@ import '../../models/conversion_unit.dart';
 class NumberSystemData {
   /// 进制单位列表
   static const units = [
-    ConversionUnit(
-      id: 'binary',
-      name: '二进制',
-      symbol: 'BIN',
-      toBaseRatio: 2,
-    ),
-    ConversionUnit(
-      id: 'octal',
-      name: '八进制',
-      symbol: 'OCT',
-      toBaseRatio: 8,
-    ),
-    ConversionUnit(
-      id: 'decimal',
-      name: '十进制',
-      symbol: 'DEC',
-      toBaseRatio: 10,
-    ),
+    ConversionUnit(id: 'binary', name: '二进制', symbol: 'BIN', toBaseRatio: 2),
+    ConversionUnit(id: 'octal', name: '八进制', symbol: 'OCT', toBaseRatio: 8),
+    ConversionUnit(id: 'decimal', name: '十进制', symbol: 'DEC', toBaseRatio: 10),
     ConversionUnit(
       id: 'hexadecimal',
       name: '十六进制',

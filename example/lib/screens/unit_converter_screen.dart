@@ -11,7 +11,7 @@ class UnitConverterScreen extends StatefulWidget {
 class _UnitConverterScreenState extends State<UnitConverterScreen> {
   final _converter = UnitConverter();
   final _inputController = TextEditingController(text: '1');
-  
+
   String? _selectedCategoryId;
   String? _fromUnitId;
   String? _toUnitId;
@@ -42,7 +42,9 @@ class _UnitConverterScreenState extends State<UnitConverterScreen> {
   }
 
   void _convert() {
-    if (_selectedCategoryId == null || _fromUnitId == null || _toUnitId == null) {
+    if (_selectedCategoryId == null ||
+        _fromUnitId == null ||
+        _toUnitId == null) {
       return;
     }
 
@@ -91,7 +93,10 @@ class _UnitConverterScreenState extends State<UnitConverterScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text('选择类别', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const Text(
+              '选择类别',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             DropdownButtonFormField<String>(
               value: _selectedCategoryId,
@@ -110,7 +115,10 @@ class _UnitConverterScreenState extends State<UnitConverterScreen> {
               },
             ),
             const SizedBox(height: 24),
-            const Text('输入数值', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const Text(
+              '输入数值',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             TextField(
               controller: _inputController,
@@ -118,13 +126,16 @@ class _UnitConverterScreenState extends State<UnitConverterScreen> {
                 border: OutlineInputBorder(),
                 hintText: '请输入数值',
               ),
-              keyboardType: _selectedCategoryId == 'number_system' 
-                  ? TextInputType.text 
+              keyboardType: _selectedCategoryId == 'number_system'
+                  ? TextInputType.text
                   : const TextInputType.numberWithOptions(decimal: true),
               onChanged: (_) => _convert(),
             ),
             const SizedBox(height: 24),
-            const Text('从', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const Text(
+              '从',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             DropdownButtonFormField<String>(
               value: _fromUnitId,
@@ -157,7 +168,10 @@ class _UnitConverterScreenState extends State<UnitConverterScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            const Text('到', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const Text(
+              '到',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             DropdownButtonFormField<String>(
               value: _toUnitId,
@@ -185,12 +199,18 @@ class _UnitConverterScreenState extends State<UnitConverterScreen> {
                   children: [
                     const Text(
                       '转换结果',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 8),
                     Text(
                       _result.isEmpty ? '等待输入...' : _result,
-                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),

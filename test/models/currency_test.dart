@@ -4,11 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('Currency', () {
     test('创建货币实例', () {
-      const currency = Currency(
-        code: 'USD',
-        name: '美元',
-        symbol: '\$',
-      );
+      const currency = Currency(code: 'USD', name: '美元', symbol: '\$');
 
       expect(currency.code, 'USD');
       expect(currency.name, '美元');
@@ -25,11 +21,7 @@ void main() {
     });
 
     test('toString 方法', () {
-      const currency = Currency(
-        code: 'USD',
-        name: '美元',
-        symbol: '\$',
-      );
+      const currency = Currency(code: 'USD', name: '美元', symbol: '\$');
 
       expect(currency.toString(), '美元 (\$)');
     });

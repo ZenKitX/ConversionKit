@@ -244,8 +244,8 @@ class MortgageLogic {
     // 计算新的总利息（已还利息 + 剩余利息）
     final paidInterest = paidMonths > 0
         ? originalSchedule
-            .take(paidMonths)
-            .fold<double>(0, (sum, payment) => sum + payment.interest)
+              .take(paidMonths)
+              .fold<double>(0, (sum, payment) => sum + payment.interest)
         : 0.0;
     final newTotalInterest = paidInterest + calculateTotalInterest(newSchedule);
 
@@ -253,8 +253,9 @@ class MortgageLogic {
     final savedInterest = originalTotalInterest - newTotalInterest;
 
     // 新的月供
-    final newMonthlyPayment =
-        newSchedule.isNotEmpty ? newSchedule.first.payment : 0.0;
+    final newMonthlyPayment = newSchedule.isNotEmpty
+        ? newSchedule.first.payment
+        : 0.0;
 
     // 新的还款总额
     final newTotalPayment = principal + newTotalInterest;
